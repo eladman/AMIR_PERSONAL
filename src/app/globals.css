@@ -73,6 +73,21 @@
   display: block;
 }
 
+/* Prevent flash of content before GSAP animations initialize */
+.hero-float-img,
+.hero-subtitle,
+.hero-manifesto,
+.hero-cta,
+.hero-scroll-indicator,
+.hero-line-1,
+.hero-line-2 {
+  visibility: hidden;
+}
+
+.nav-init {
+  visibility: hidden;
+}
+
 /* Parallax image container */
 .parallax-img-container {
   overflow: hidden;

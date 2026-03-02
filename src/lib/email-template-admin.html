@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body dir="rtl" style="margin:0;padding:0;background-color:#ffffff;font-family:'Heebo',Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;direction:rtl;">
+  <table dir="rtl" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#ffffff;padding:32px 16px;direction:rtl;">
+    <tr><td align="center">
+      <table dir="rtl" width="600" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#ffffff;direction:rtl;">
+
+        <!-- Top bar -->
+        <tr>
+          <td style="padding:0 0 24px;">
+            <table dir="rtl" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="direction:rtl;">
+              <tr>
+                <td style="text-align:right;">
+                  <span style="color:#FF8714;font-size:14px;font-weight:700;">מאפס לאחד</span>
+                </td>
+                <td style="text-align:left;">
+                  <span style="color:#bbb;font-size:12px;">{{ $json.timestamp }}</span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Divider -->
+        <tr>
+          <td><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-bottom:1px solid #eee;height:1px;font-size:0;">&nbsp;</td></tr></table></td>
+        </tr>
+
+        <!-- Title -->
+        <tr>
+          <td style="padding:24px 0 20px;text-align:right;">
+            <p style="color:#999;font-size:12px;font-weight:700;margin:0 0 4px;text-transform:uppercase;letter-spacing:1px;">הרשמה חדשה</p>
+            <h2 style="color:#333;margin:0;font-size:20px;font-weight:700;">{{ $json.fullName }}</h2>
+          </td>
+        </tr>
+
+        <!-- Details table -->
+        <tr>
+          <td style="padding:0 0 24px;">
+            <table dir="rtl" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid #f0f0f0;border-radius:8px;border-collapse:separate;direction:rtl;">
+              <tr>
+                <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#999;font-size:12px;font-weight:700;width:110px;text-align:right;vertical-align:top;">שם מלא</td>
+                <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#333;font-size:14px;text-align:right;">{{ $json.fullName }}</td>
+              </tr>
+              <tr>
+                <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#999;font-size:12px;font-weight:700;text-align:right;vertical-align:top;">אימייל</td>
+                <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#333;font-size:14px;text-align:right;">
+                  <a href="mailto:{{ $json.email }}" style="color:#333;text-decoration:none;">{{ $json.email }}</a>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#999;font-size:12px;font-weight:700;text-align:right;vertical-align:top;">טלפון</td>
+                <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#333;font-size:14px;text-align:right;">
+                  <a href="tel:{{ $json.phone }}" style="color:#333;text-decoration:none;">{{ $json.phone }}</a>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#999;font-size:12px;font-weight:700;text-align:right;vertical-align:top;">עיסוק</td>
+                <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#333;font-size:14px;text-align:right;">{{ $json.lifeStatus }}</td>
+              </tr>
+              <tr>
+                <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#999;font-size:12px;font-weight:700;text-align:right;vertical-align:top;">מקור הגעה</td>
+                <td style="padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#333;font-size:14px;text-align:right;">{{ $json.referralSource }}</td>
+              </tr>
+              <tr>
+                <td style="padding:12px 16px;color:#999;font-size:12px;font-weight:700;text-align:right;vertical-align:top;">סיבת הרשמה</td>
+                <td style="padding:12px 16px;color:#333;font-size:14px;line-height:1.6;text-align:right;">{{ $json.reason }}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Sheets link -->
+        <tr>
+          <td style="padding:0 0 24px;text-align:right;">
+            <a href="https://docs.google.com/spreadsheets/d/11Z0WZzYWAd7g-O8UG4dfTsOQBmYqwH-5X0LwkoiD8Ko/edit" style="color:#FF8714;font-size:14px;font-weight:700;text-decoration:none;">לצפייה בכל ההרשמות &larr;</a>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-bottom:1px solid #eee;height:1px;font-size:0;">&nbsp;</td></tr></table></td>
+        </tr>
+        <tr>
+          <td style="padding:16px 0 0;text-align:right;">
+            <p style="color:#ccc;font-size:11px;margin:0;">התראה אוטומטית &bull; מאפס לאחד</p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

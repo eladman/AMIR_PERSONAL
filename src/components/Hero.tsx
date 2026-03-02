@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,6 +15,13 @@ export default function Hero() {
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     const ctx = gsap.context(() => {
+      // Reveal elements — runs synchronously before .from() sets opacity:0/transforms,
+      // so no flash occurs (browser doesn't repaint mid-JS-execution)
+      gsap.set(
+        ".hero-float-img, .hero-subtitle, .hero-manifesto, .hero-cta, .hero-scroll-indicator, .hero-line-1, .hero-line-2",
+        { visibility: "visible" }
+      );
+
       // force3D ensures translate3d() is used, keeping animations on the GPU
       const tl = gsap.timeline({ defaults: { ease: "power3.out", force3D: true } });
 
@@ -194,13 +202,13 @@ export default function Hero() {
           </div>
 
           {/* CTA */}
-          <a
-            href="#register"
+          <Link
+            href="/register"
             className="hero-cta group relative inline-flex overflow-hidden bg-primary text-white px-8 py-4 rounded-full text-lg md:text-xl font-bold transition-transform hover:scale-[1.03] active:scale-95 w-fit"
           >
             <span className="relative z-10">אני רוצה להירשם</span>
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </a>
+          </Link>
         </div>
 
         {/* Image side — floating gallery */}

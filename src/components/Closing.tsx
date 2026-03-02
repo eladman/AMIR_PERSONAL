@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 export default function Closing() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -83,7 +84,7 @@ export default function Closing() {
 
   return (
     <section
-      id="register"
+      id="closing"
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center text-center overflow-hidden bg-white"
     >
@@ -123,9 +124,9 @@ export default function Closing() {
           עבורך — זה המקום.
         </p>
 
-        <a
+        <Link
           ref={btnRef}
-          href="#"
+          href="/register"
           className="closing-cta group relative inline-flex overflow-hidden bg-primary text-secondary px-8 py-4 md:px-12 md:py-6 rounded-full text-xl md:text-2xl font-black shadow-2xl shadow-primary/30 transition-shadow hover:shadow-primary/50"
         >
           <span className="relative z-10 flex items-center gap-3 text-[rgba(255,255,240,1)]">
@@ -147,7 +148,7 @@ export default function Closing() {
             </svg>
           </span>
           <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-        </a>
+        </Link>
       </div>
     </section>
   );

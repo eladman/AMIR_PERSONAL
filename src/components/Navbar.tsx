@@ -14,6 +14,8 @@ export default function Navbar() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      gsap.set(containerRef.current, { visibility: "visible" });
+
       // Entrance: slide down after hero loads
       gsap.from(containerRef.current, {
         y: -100,
@@ -52,7 +54,7 @@ export default function Navbar() {
     <>
       <div
         ref={containerRef}
-        className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
+        className="nav-init fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
       >
         <nav
           ref={navRef}
@@ -84,10 +86,10 @@ export default function Navbar() {
 
           {/* CTA */}
           <Link
-            href="#register"
+            href="/register"
             className="hidden md:inline-flex group relative overflow-hidden bg-primary text-white px-5 py-1.5 rounded-full text-sm font-bold transition-transform hover:scale-[1.03] active:scale-95"
           >
-            <span className="relative z-10">הצטרף עכשיו</span>
+            <span className="relative z-10">להרשמה</span>
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
           </Link>
 
@@ -123,7 +125,7 @@ export default function Navbar() {
             { href: "#about", label: "על עמיר" },
             { href: "#topics", label: "הסדנה" },
             { href: "#format", label: "המפגש" },
-            { href: "#register", label: "הצטרף עכשיו" },
+            { href: "/register", label: "הצטרף עכשיו" },
           ].map((link) => (
             <Link
               key={link.href}
