@@ -179,7 +179,7 @@ export default function Topics() {
                       setActiveIndex(index);
                     }
                   }}
-                  className={`absolute inset-0 bg-secondary rounded-[2.5rem] p-6 md:p-8 lg:p-12 shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.2,1)] flex flex-col justify-center overflow-hidden
+                  className={`absolute inset-0 bg-secondary rounded-[2.5rem] p-6 md:p-8 lg:p-12 shadow-2xl transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.25,1,0.2,1)] flex flex-col justify-center overflow-hidden
                     ${offset > 0 ? 'cursor-pointer hover:bg-[#000042]' : ''}
                   `}
                   style={{

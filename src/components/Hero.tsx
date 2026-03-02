@@ -11,16 +11,10 @@ export default function Hero() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      // Pre-set initial states — prevents flash before timeline reaches each element
-      gsap.set(".hero-float-img", { y: 80, opacity: 0 });
-      gsap.set(".hero-line-1", { yPercent: 100 });
-      gsap.set(".hero-line-2", { yPercent: 100 });
-      gsap.set(".hero-subtitle", { y: 20, opacity: 0 });
-      gsap.set(".hero-manifesto", { y: 30, opacity: 0 });
-      gsap.set(".hero-cta", { y: 20, opacity: 0 });
-      gsap.set(".hero-scroll-indicator", { opacity: 0 });
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
+    const ctx = gsap.context(() => {
+      // force3D ensures translate3d() is used, keeping animations on the GPU
       const tl = gsap.timeline({ defaults: { ease: "power3.out", force3D: true } });
 
       // Floating images entrance — slide up + fade
@@ -73,30 +67,38 @@ export default function Hero() {
         "-=0.5"
       );
 
-      // Continuous float loops for images — rotation skipped on mobile (too expensive)
-      const isMobile = window.innerWidth < 768;
-      gsap.utils.toArray<HTMLElement>(".hero-float-img").forEach((img, i) => {
-        gsap.to(img, {
-          y: `${i % 2 === 0 ? "-" : ""}${isMobile ? 6 : 12}`,
-          ...(isMobile ? {} : { rotation: i % 2 === 0 ? 1.5 : -1.5 }),
-          duration: 3 + i * 0.5,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-          overwrite: "auto",
+      // Continuous float/rotate loops — desktop only (images are hidden on mobile
+      // but the tweens would still run and consume CPU/GPU time)
+      if (!isMobile) {
+        gsap.utils.toArray<HTMLElement>(".hero-float-img").forEach((img, i) => {
+          gsap.to(img, {
+            y: i % 2 === 0 ? -12 : 12,
+            rotation: i % 2 === 0 ? 1.5 : -1.5,
+            duration: 3 + i * 0.5,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+            force3D: true,
+          });
         });
-      });
+      }
+
+      // scrub: 1 adds 1s of lag-smoothing so animation chases the scroll
+      // position instead of jumping on every frame — feels much smoother on
+      // mobile devices that drop frames under scroll load.
+      const scrubValue = isMobile ? 1.5 : 1;
 
       // Scroll-driven: content fade-out
       gsap.to(".hero-content", {
         opacity: 0,
         y: -60,
         ease: "none",
+        force3D: true,
         scrollTrigger: {
           trigger: containerRef.current,
           start: "30% top",
           end: "bottom top",
-          scrub: true,
+          scrub: scrubValue,
         },
       });
 
@@ -105,11 +107,12 @@ export default function Hero() {
         opacity: 0,
         y: -40,
         ease: "none",
+        force3D: true,
         scrollTrigger: {
           trigger: containerRef.current,
           start: "30% top",
           end: "bottom top",
-          scrub: true,
+          scrub: scrubValue,
         },
       });
 
@@ -208,7 +211,7 @@ export default function Hero() {
               src="/images/pic_10.jpeg"
               alt="סדנה מאפס לאחד"
               fill
-              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-[transform,filter] duration-700 scale-105 group-hover:scale-100"
               sizes="(max-width: 768px) 55vw, 30vw"
               priority
             />
@@ -221,7 +224,7 @@ export default function Hero() {
               src="/images/pic_8.jpeg"
               alt="אווירת הסדנה"
               fill
-              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-[transform,filter] duration-700 scale-105 group-hover:scale-100"
               sizes="(max-width: 768px) 45vw, 22vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
@@ -233,7 +236,7 @@ export default function Hero() {
               src="/images/pic_7.jpeg"
               alt="אווירת הסדנה"
               fill
-              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-[transform,filter] duration-700 scale-105 group-hover:scale-100"
               sizes="(max-width: 768px) 35vw, 17vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />

@@ -112,13 +112,6 @@
   animation: slow-spin 40s linear infinite; will-change: transform;
 }
 
-/* Hero GPU acceleration */
-.hero-float-img,
-.hero-line-1,
-.hero-line-2 {
-  will-change: transform, opacity;
-}
-
 /* Shimmer on stat cards */
 .stat-card-shimmer { position: relative; overflow: hidden; }
 .stat-card-shimmer::after {
@@ -126,4 +119,25 @@
   background: linear-gradient(105deg, transparent 40%, rgba(255,135,20,0.12) 50%, transparent 60%);
   transform: translateX(100%);
   animation: shimmer 2.2s ease-in-out infinite;
+}
+
+/* ── Mobile performance ─────────────────────────────────────────────────────
+   Disable GPU-heavy decorative effects on small screens.
+   - Large CSS blur() forces a full repaint on every animation frame.
+   - Continuous spin/breathe cycles compete with GSAP scroll work.
+   ─────────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .ambient-orb {
+    display: none;
+  }
+  .geo-ring {
+    display: none;
+  }
+  .stat-card-shimmer::after {
+    animation: none;
+  }
+  /* Release compositor layers that are wasteful when the element is idle */
+  .marquee-track {
+    will-change: auto;
+  }
 }
