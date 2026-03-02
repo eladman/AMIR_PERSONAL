@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "מאפס לאחד",
     images: [
       {
-        url: "/images/pic_10.jpeg",
+        url: "/images/pic_2.jpeg",
         width: 1200,
         height: 630,
         alt: "סדנת מאפס לאחד - עמיר מנחם",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "מאפס לאחד | עמיר מנחם",
     description: "סדנה אישית אינטנסיבית שתעזור לך לקחת את הרעיון שלך ולהפוך אותו למציאות.",
-    images: ["/images/pic_10.jpeg"],
+    images: ["/images/pic_2.jpeg"],
   },
 };
 
