@@ -26,7 +26,7 @@ export default function Navbar() {
     <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <nav
         ref={navRef}
-        className="pointer-events-auto flex items-center justify-between w-full max-w-5xl px-6 py-3 rounded-full transition-all duration-500 bg-transparent text-white border border-transparent [&.nav-scrolled]:bg-background/80 [&.nav-scrolled]:backdrop-blur-xl [&.nav-scrolled]:text-secondary [&.nav-scrolled]:border-secondary/10 shadow-sm [&.nav-scrolled]:shadow-md"
+        className="pointer-events-auto flex items-center justify-between w-full max-w-5xl px-6 py-3 rounded-full transition-all duration-500 bg-transparent text-secondary border border-transparent [&.nav-scrolled]:bg-background/80 [&.nav-scrolled]:backdrop-blur-xl [&.nav-scrolled]:border-secondary/10 shadow-sm [&.nav-scrolled]:shadow-md"
       >
         <div className="font-black text-xl tracking-tight">
           מאפס לאחד
