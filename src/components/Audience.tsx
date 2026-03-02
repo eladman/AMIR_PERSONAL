@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CheckCircle2 } from "lucide-react";
 
 const audienceList = [
   "לאנשים שמרגישים שהם יכולים יותר",
@@ -18,27 +17,43 @@ export default function Audience() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      // Header dramatic entrance
       gsap.from(".audience-header", {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 80%",
         },
-        y: 30,
+        y: 60,
         opacity: 0,
-        duration: 1,
+        duration: 1.2,
         ease: "power3.out",
       });
 
+      // Items slide in from right (RTL) with stagger
       gsap.from(".audience-item", {
         scrollTrigger: {
           trigger: ".audience-list",
           start: "top 85%",
         },
-        x: 40,
+        x: 80,
         opacity: 0,
         duration: 0.8,
-        stagger: 0.15,
-        ease: "power2.out",
+        stagger: 0.2,
+        ease: "power3.out",
+      });
+
+      // Numbers pop in
+      gsap.from(".audience-number", {
+        scrollTrigger: {
+          trigger: ".audience-list",
+          start: "top 85%",
+        },
+        scale: 0,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "back.out(1.7)",
+        delay: 0.3,
       });
     }, containerRef);
 
@@ -46,34 +61,40 @@ export default function Audience() {
   }, []);
 
   return (
-    <section id="audience" ref={containerRef} className="py-24 md:py-32 px-6 bg-background text-secondary relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-5">
-        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary blur-[120px]" />
-      </div>
-
-      <div className="max-w-4xl mx-auto relative z-10 text-center">
-        <div className="audience-header mb-16">
-          <h2 className="text-primary font-bold text-xl mb-4 uppercase tracking-widest">
+    <section
+      id="audience"
+      ref={containerRef}
+      className="py-24 md:py-32 px-6 bg-white text-secondary relative overflow-hidden"
+    >
+      <div className="max-w-5xl mx-auto relative z-10">
+        {/* Header */}
+        <div className="audience-header mb-16 md:mb-20">
+          <h2 className="text-primary font-bold text-sm md:text-base mb-4 tracking-[0.3em] uppercase">
             למי זה מיועד?
           </h2>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-black">
-            האם המקום הזה <br className="md:hidden" />
+          <h3 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight">
+            האם המקום הזה{" "}
             <span className="text-primary">עבורך?</span>
           </h3>
         </div>
 
-        <div className="audience-list flex flex-col gap-6 items-start text-right max-w-2xl mx-auto">
+        {/* Line-style items */}
+        <div className="audience-list flex flex-col">
           {audienceList.map((item, index) => (
-            <div 
+            <div
               key={index}
-              className="audience-item flex items-center gap-6 bg-secondary/5 border border-secondary/10 w-full p-6 md:p-8 rounded-[2rem] hover:bg-secondary/10 transition-colors"
+              className="audience-item group flex items-center gap-6 md:gap-10 py-8 md:py-10 border-b border-secondary/10 hover:border-primary/30 transition-colors cursor-default"
             >
-              <div className="text-primary shrink-0">
-                <CheckCircle2 size={32} strokeWidth={2.5} />
-              </div>
-              <p className="text-xl md:text-2xl font-medium leading-relaxed">
+              {/* Large faded number */}
+              <span className="audience-number text-5xl md:text-7xl font-black text-secondary/10 group-hover:text-primary/40 transition-colors duration-300 shrink-0 w-20 md:w-28 text-center">
+                0{index + 1}
+              </span>
+
+              {/* Divider line */}
+              <span className="hidden md:block w-12 group-hover:w-20 h-[2px] bg-secondary/20 group-hover:bg-primary transition-all duration-500 shrink-0" />
+
+              {/* Text */}
+              <p className="text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed text-secondary/70 group-hover:text-secondary transition-colors duration-300">
                 {item}
               </p>
             </div>

@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { 
-  TrendingUp, 
-  Target, 
-  Shield, 
-  Lightbulb, 
-  Activity, 
+import {
+  TrendingUp,
+  Target,
+  Shield,
+  Lightbulb,
+  Activity,
   Users,
   ChevronLeft,
   ChevronRight
@@ -71,7 +71,7 @@ export default function Topics() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    
+
     // Entrance animation for the whole section
     const ctx = gsap.context(() => {
       gsap.from(".topic-title-anim", {
@@ -85,7 +85,7 @@ export default function Topics() {
         stagger: 0.2,
         ease: "power3.out",
       });
-      
+
       gsap.from(".stack-container", {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -105,9 +105,9 @@ export default function Topics() {
     <section id="topics" ref={containerRef} className="py-24 md:py-32 px-6 bg-background relative overflow-hidden">
       {/* Decorative background element */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-      
+
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 relative z-10 items-center">
-        
+
         {/* Right Column - Title */}
         <div className="lg:w-5/12 relative z-20">
           <div>
@@ -131,7 +131,7 @@ export default function Topics() {
             {/* Navigation Controls */}
             <div className="topic-title-anim flex items-center gap-4 mt-10">
               {/* In RTL, Right chevron is Previous, Left chevron is Next */}
-              <button 
+              <button
                 onClick={handlePrev}
                 disabled={activeIndex === 0}
                 className="w-12 h-12 rounded-full border-2 border-secondary/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-secondary disabled:cursor-not-allowed"
@@ -139,12 +139,12 @@ export default function Topics() {
               >
                 <ChevronRight size={24} />
               </button>
-              
+
               <div className="text-xl font-bold text-secondary font-mono w-16 text-center">
                 {activeIndex + 1} <span className="text-secondary/30 text-lg">/</span> {topics.length}
               </div>
-              
-              <button 
+
+              <button
                 onClick={handleNext}
                 disabled={activeIndex === topics.length - 1}
                 className="w-12 h-12 rounded-full border-2 border-secondary/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-secondary disabled:cursor-not-allowed"
@@ -164,9 +164,9 @@ export default function Topics() {
               const offset = index - activeIndex;
               const isActive = offset === 0;
               const isPast = offset < 0;
-              
+
               return (
-                <div 
+                <div
                   key={topic.id}
                   onClick={() => {
                     if (offset > 0) {
@@ -178,8 +178,8 @@ export default function Topics() {
                   `}
                   style={{
                     zIndex: isPast ? 40 + offset : 30 - offset,
-                    transform: isPast 
-                      ? 'translateY(-100px) scale(0.95)' 
+                    transform: isPast
+                      ? 'translateY(-100px) scale(0.95)'
                       : `translateY(${offset * 28}px) scale(${1 - offset * 0.06})`,
                     opacity: isPast ? 0 : Math.max(1 - offset * 0.3, 0),
                     pointerEvents: isActive || offset > 0 ? 'auto' : 'none',
@@ -197,16 +197,16 @@ export default function Topics() {
                     <div className="w-16 h-16 bg-primary/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 text-primary transition-all duration-500 hover:scale-110 hover:bg-primary hover:text-secondary">
                       <Icon size={32} strokeWidth={2} />
                     </div>
-                    
+
                     <h4 className="text-3xl md:text-4xl font-bold mb-4 text-white">
                       {topic.title}
                     </h4>
-                    
+
                     <p className="text-xl text-white/70 leading-relaxed font-light">
                       {topic.description}
                     </p>
                   </div>
-                  
+
                   {/* Click to reveal indicator for upcoming cards */}
                   {offset > 0 && offset < 3 && (
                     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 opacity-0 hover:opacity-100 transition-opacity text-white/40 text-sm font-medium tracking-wide">

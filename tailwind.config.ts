@@ -17,6 +17,17 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-heebo)", "sans-serif"],
       },
+      keyframes: {
+        "scroll-line": {
+          "0%": { transform: "scaleY(0)", transformOrigin: "top" },
+          "50%": { transform: "scaleY(1)", transformOrigin: "top" },
+          "50.1%": { transformOrigin: "bottom" },
+          "100%": { transform: "scaleY(0)", transformOrigin: "bottom" },
+        },
+      },
+      animation: {
+        "scroll-line": "scroll-line 2s ease-in-out infinite",
+      },
     },
   },
   plugins: [],

@@ -2,63 +2,114 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     const ctx = gsap.context(() => {
-      // Entrance animations for text elements
-      gsap.from(".hero-element", {
-        y: 40,
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      // Floating images entrance — slide up + fade
+      tl.from(".hero-float-img", {
+        y: 80,
         opacity: 0,
         duration: 1.2,
-        stagger: 0.15,
-        ease: "power3.out",
-        delay: 0.2,
-      });
-
-      // Continuous floating animation for images
-      gsap.to(".floating-image-1", {
-        y: "-15px",
-        rotation: 1,
-        duration: 4,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
-
-      gsap.to(".floating-image-2", {
-        y: "15px",
-        rotation: -2,
-        duration: 5,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 0.5,
-      });
-
-      gsap.to(".floating-image-3", {
-        y: "-10px",
-        rotation: 2,
-        duration: 4.5,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 1,
-      });
-
-      // Entrance animation for images
-      gsap.from(".floating-image", {
-        y: 60,
-        opacity: 0,
-        duration: 1.5,
         stagger: 0.2,
         ease: "power3.out",
-        delay: 0.5,
       });
 
+      // Headline clip-reveal
+      tl.from(
+        ".hero-line-1",
+        { yPercent: 100, duration: 1, ease: "power4.out" },
+        "-=0.8"
+      );
+      tl.from(
+        ".hero-line-2",
+        { yPercent: 100, duration: 1, ease: "power4.out" },
+        "-=0.7"
+      );
+
+      // Subtitle
+      tl.from(
+        ".hero-subtitle",
+        { y: 20, opacity: 0, duration: 0.8 },
+        "-=0.5"
+      );
+
+      // Manifesto stagger
+      tl.from(
+        ".hero-manifesto",
+        { y: 30, opacity: 0, duration: 0.8, stagger: 0.12 },
+        "-=0.4"
+      );
+
+      // CTA + scroll indicator
+      tl.from(
+        ".hero-cta",
+        { y: 20, opacity: 0, duration: 0.8 },
+        "-=0.3"
+      );
+      tl.from(
+        ".hero-scroll-indicator",
+        { opacity: 0, duration: 0.8 },
+        "-=0.5"
+      );
+
+      // Continuous float/rotate loops for images
+      gsap.utils.toArray<HTMLElement>(".hero-float-img").forEach((img, i) => {
+        gsap.to(img, {
+          y: `${i % 2 === 0 ? "-" : ""}12`,
+          rotation: i % 2 === 0 ? 1.5 : -1.5,
+          duration: 3 + i * 0.5,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+        });
+      });
+
+      // Scroll-driven: content fade-out
+      gsap.to(".hero-content", {
+        opacity: 0,
+        y: -60,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "30% top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // Scroll-driven: images fade-out
+      gsap.to(".hero-images", {
+        opacity: 0,
+        y: -40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "30% top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // Scroll progress bar
+      gsap.to(".scroll-progress", {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: document.body,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.3,
+        },
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -67,93 +118,109 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-[100dvh] bg-white overflow-hidden flex items-center pt-20"
+      className="relative w-full h-[100dvh] overflow-hidden bg-white"
     >
-      {/* Noise Overlay */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply z-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }} />
-      
-      {/* Background radial gradient to create depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,135,20,0.08),transparent_50%)] z-0" />
+      {/* Radial glow — warm orange positioned near images */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,135,20,0.06),transparent_50%)]" />
+      {/* Secondary subtle glow at bottom-left */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,135,20,0.03),transparent_40%)]" />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
-        {/* Right Side: Text Content (RTL -> appears on the right in the layout, actually it's left in the DOM but RTL makes it right) */}
-        <div className="flex flex-col items-start text-secondary order-2 lg:order-1">
-          <h1 className="hero-element text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
-            מאפס <span className="text-primary">לאחד</span>
+      {/* 2-column grid */}
+      <div className="relative z-10 h-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        {/* Text side */}
+        <div className="hero-content order-2 md:order-1 flex flex-col justify-center pb-20 md:pb-0">
+          {/* Subtitle */}
+          <p className="hero-subtitle text-primary text-sm md:text-base tracking-[0.3em] uppercase font-bold mb-6">
+            הסדנה של עמיר מנחם
+          </p>
+
+          {/* Headline */}
+          <h1 className="mb-8">
+            <span className="split-line block">
+              <span className="hero-line-1 block text-secondary text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[0.9]">
+                מאפס
+              </span>
+            </span>
+            <span className="split-line block">
+              <span className="hero-line-2 block text-primary text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[0.9]">
+                לאחד
+              </span>
+            </span>
           </h1>
 
-          <div className="hero-element flex flex-col gap-2 border-r-4 border-primary pr-6 mb-10">
-            <p className="text-xl md:text-3xl font-medium">
+          {/* Manifesto */}
+          <div className="flex flex-col gap-2 mb-10 max-w-xl">
+            <p className="hero-manifesto text-secondary/90 text-lg md:text-2xl font-medium">
               יש רגע בו אתה מבין.
             </p>
-            <p className="text-lg md:text-2xl opacity-90">
+            <p className="hero-manifesto text-secondary/60 text-base md:text-xl">
               אף אחד לא יבוא לשנות לך את החיים.
             </p>
-            <p className="text-lg md:text-2xl opacity-90">
+            <p className="hero-manifesto text-secondary/60 text-base md:text-xl">
               לא המדינה, לא הבוס, לא אלגוריתם.
             </p>
-            <p className="text-xl md:text-3xl font-bold mt-2 text-primary">
+            <p className="hero-manifesto text-primary text-lg md:text-2xl font-bold mt-1">
               רק אתה.
             </p>
           </div>
 
-          <div className="hero-element flex flex-wrap gap-3 mb-12 opacity-90 font-medium">
-            <span className="bg-secondary/5 border border-secondary/10 backdrop-blur-sm px-5 py-2.5 rounded-full text-sm md:text-base">איך מייצרים חיים פרו-אקטיביים?</span>
-            <span className="bg-secondary/5 border border-secondary/10 backdrop-blur-sm px-5 py-2.5 rounded-full text-sm md:text-base">איך הופכים שאיפות לתוצאות?</span>
-            <span className="bg-secondary/5 border border-secondary/10 backdrop-blur-sm px-5 py-2.5 rounded-full text-sm md:text-base">איך הופכים דיבורים, למעשים?</span>
-          </div>
-
+          {/* CTA */}
           <a
             href="#register"
-            className="hero-element group relative overflow-hidden bg-primary text-secondary px-8 py-4 rounded-full text-lg md:text-xl font-bold transition-transform hover:scale-[1.03]"
-            style={{ transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)" }}
+            className="hero-cta group relative inline-flex overflow-hidden bg-primary text-white px-8 py-4 rounded-full text-lg md:text-xl font-bold transition-transform hover:scale-[1.03] active:scale-95 w-fit"
           >
             <span className="relative z-10">אני רוצה להירשם</span>
-            <div className="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
           </a>
         </div>
 
-        {/* Left Side: Floating Image Gallery */}
-        <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] w-full flex items-center justify-center order-1 lg:order-2 mt-8 lg:mt-0">
-          {/* Main Image */}
-          <div className="floating-image floating-image-1 absolute z-30 w-[60%] sm:w-[50%] lg:w-[55%] aspect-[3/4] left-[5%] sm:left-[15%] lg:left-[10%] rounded-[2rem] overflow-hidden shadow-2xl border border-secondary/10 transform rotate-[-3deg]">
+        {/* Image side — floating gallery */}
+        <div className="hero-images order-1 md:order-2 relative h-[40vh] md:h-[80vh] flex items-center justify-center">
+          {/* Image 1 — main, centered-right */}
+          <div className="hero-float-img absolute top-[10%] right-[5%] md:right-[10%] w-[55%] md:w-[60%] aspect-[3/4] rounded-[2rem] overflow-hidden border border-secondary/10 shadow-[0_8px_40px_rgba(255,135,20,0.15)] group">
             <Image
               src="/images/pic_10.jpeg"
-              alt="Atmosphere 1"
+              alt="סדנה מאפס לאחד"
               fill
-              className="object-cover mix-blend-luminosity opacity-80 transition-all duration-500 hover:mix-blend-normal hover:opacity-100"
-              sizes="(max-width: 768px) 60vw, 30vw"
+              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+              sizes="(max-width: 768px) 55vw, 30vw"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent mix-blend-overlay pointer-events-none transition-opacity duration-500 hover:opacity-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
           </div>
 
-          {/* Secondary Image (Back Right) */}
-          <div className="floating-image floating-image-2 absolute z-20 w-[50%] sm:w-[40%] lg:w-[45%] aspect-square right-[10%] sm:right-[20%] lg:right-[15%] top-[5%] rounded-[2rem] overflow-hidden shadow-2xl border border-secondary/10 transform rotate-[6deg]">
+          {/* Image 2 — bottom-left, overlapping */}
+          <div className="hero-float-img absolute bottom-[5%] left-[0%] md:left-[5%] w-[45%] md:w-[45%] aspect-[4/3] rounded-[2rem] overflow-hidden border border-secondary/10 shadow-[0_8px_40px_rgba(255,135,20,0.12)] group">
             <Image
               src="/images/pic_8.jpeg"
-              alt="Atmosphere 2"
+              alt="אווירת הסדנה"
               fill
-              className="object-cover mix-blend-luminosity opacity-60 transition-all duration-500 hover:mix-blend-normal hover:opacity-100"
-              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+              sizes="(max-width: 768px) 45vw, 22vw"
             />
-            <div className="absolute inset-0 bg-secondary/40 mix-blend-multiply pointer-events-none transition-opacity duration-500 hover:opacity-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
           </div>
 
-          {/* Tertiary Image (Bottom Right) */}
-          <div className="floating-image floating-image-3 absolute z-40 w-[45%] sm:w-[35%] lg:w-[40%] aspect-[4/3] right-[15%] sm:right-[25%] lg:right-[20%] bottom-[10%] rounded-[2rem] overflow-hidden shadow-xl border border-secondary/10 transform rotate-[-5deg]">
+          {/* Image 3 — top-left, smaller accent */}
+          <div className="hero-float-img absolute top-[5%] left-[10%] md:left-[0%] w-[35%] md:w-[35%] aspect-[3/4] rounded-[2rem] overflow-hidden border border-secondary/10 shadow-[0_8px_40px_rgba(255,135,20,0.10)] group">
             <Image
               src="/images/pic_7.jpeg"
-              alt="Atmosphere 3"
+              alt="אווירת הסדנה"
               fill
-              className="object-cover mix-blend-luminosity opacity-70 transition-all duration-500 hover:mix-blend-normal hover:opacity-100"
-              sizes="(max-width: 768px) 45vw, 20vw"
+              className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+              sizes="(max-width: 768px) 35vw, 17vw"
             />
-            <div className="absolute inset-0 bg-primary/20 mix-blend-color pointer-events-none transition-opacity duration-500 hover:opacity-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
           </div>
         </div>
+      </div>
 
+      {/* Scroll indicator */}
+      <div className="hero-scroll-indicator absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+        <span className="text-secondary/40 text-xs tracking-widest uppercase">גלול</span>
+        <div className="w-[1px] h-8 bg-secondary/20 relative overflow-hidden">
+          <div className="absolute inset-x-0 top-0 h-full bg-primary animate-scroll-line" />
+        </div>
       </div>
     </section>
   );

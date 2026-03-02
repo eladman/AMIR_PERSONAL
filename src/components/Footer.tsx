@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="bg-background text-secondary py-12 px-6 rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden -mt-8 z-20 border-t border-secondary/10">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        
+
         <div className="flex flex-col items-center md:items-start gap-2">
           <h4 className="font-black text-2xl tracking-tight">עמיר מנחם</h4>
           <p className="text-secondary/60 text-sm font-medium">מאפס לאחד - סדנה אישית</p>

@@ -43,7 +43,7 @@ export default function Format() {
   return (
     <section id="format" ref={containerRef} className="py-24 md:py-32 px-6 bg-background text-secondary">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-        
+
         {/* Content */}
         <div className="w-full lg:w-1/2 flex flex-col items-start">
           <h2 className="format-text text-primary font-bold text-xl mb-4 uppercase tracking-widest">

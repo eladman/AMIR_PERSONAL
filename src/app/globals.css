@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-rgb: 255, 135, 20;
 }
 
 @layer base {
@@ -17,4 +18,67 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #171717;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF8714;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff9a3c;
+}
+
+/* Selection */
+::selection {
+  background: rgba(var(--primary-rgb), 0.3);
+  color: inherit;
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #FF8714;
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 9999;
+}
+
+/* Section dark helper */
+.section-dark {
+  background-color: #171717;
+  color: #ffffff;
+}
+
+/* Split line reveal helper */
+.split-line {
+  overflow: hidden;
+  display: block;
+}
+
+.split-line > span {
+  display: block;
+}
+
+/* Parallax image container */
+.parallax-img-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.parallax-img-container img {
+  will-change: transform;
 }

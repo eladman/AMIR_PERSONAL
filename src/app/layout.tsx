@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="he" dir="rtl">
       <body className={`${heebo.variable} font-sans antialiased bg-background text-foreground overflow-x-hidden`}>
         <svg
-          className="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.05] mix-blend-soft-light"
+          className="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.03] mix-blend-soft-light"
           aria-hidden="true"
         >
           <filter id="noise">
@@ -35,6 +35,7 @@ export default function RootLayout({
           </filter>
           <rect width="100%" height="100%" filter="url(#noise)" />
         </svg>
+        <div className="scroll-progress" />
         {children}
       </body>
     </html>
