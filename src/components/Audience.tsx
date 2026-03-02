@@ -55,6 +55,16 @@ export default function Audience() {
         ease: "back.out(1.7)",
         delay: 0.3,
       });
+
+      // Line draw per item
+      gsap.utils.toArray<HTMLElement>(".audience-item").forEach((item) => {
+        const line = item.querySelector(".audience-line");
+        if (!line) return;
+        gsap.from(line, {
+          scrollTrigger: { trigger: item, start: "top 85%" },
+          scaleX: 0, transformOrigin: "right center", duration: 0.8, ease: "power2.out",
+        });
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -78,6 +88,11 @@ export default function Audience() {
           </h3>
         </div>
 
+        {/* Decorative background text */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[200px] md:text-[300px] font-black text-secondary/[0.025] leading-none select-none pointer-events-none whitespace-nowrap" aria-hidden="true">
+          עשייה
+        </div>
+
         {/* Line-style items */}
         <div className="audience-list flex flex-col">
           {audienceList.map((item, index) => (
@@ -91,7 +106,7 @@ export default function Audience() {
               </span>
 
               {/* Divider line */}
-              <span className="hidden md:block w-12 group-hover:w-20 h-[2px] bg-secondary/20 group-hover:bg-primary transition-all duration-500 shrink-0" />
+              <span className="audience-line hidden md:block w-12 group-hover:w-20 h-[2px] bg-secondary/20 group-hover:bg-primary transition-all duration-500 shrink-0" />
 
               {/* Text */}
               <p className="text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed text-secondary/70 group-hover:text-secondary transition-colors duration-300">

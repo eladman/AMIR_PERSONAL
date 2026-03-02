@@ -49,6 +49,9 @@ export default function Hero() {
         "-=0.4"
       );
 
+      // Accent line reveal
+      tl.to(".hero-line-accent", { width: "80px", duration: 0.6, ease: "power2.out" }, "-=0.4");
+
       // CTA + scroll indicator
       tl.from(
         ".hero-cta",
@@ -120,10 +123,19 @@ export default function Hero() {
       ref={containerRef}
       className="relative w-full h-[100dvh] overflow-hidden bg-white"
     >
-      {/* Radial glow — warm orange positioned near images */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,135,20,0.06),transparent_50%)]" />
-      {/* Secondary subtle glow at bottom-left */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,135,20,0.03),transparent_40%)]" />
+      {/* Dot grid background */}
+      <div className="absolute inset-0 bg-dot-grid pointer-events-none" />
+
+      {/* Ambient orange orb */}
+      <div className="ambient-orb w-[600px] h-[600px] bg-primary/[0.06] blur-[80px]"
+        style={{ top: "10%", right: "-5%" }} />
+      {/* Secondary cool orb */}
+      <div className="ambient-orb w-[400px] h-[400px] bg-secondary/[0.03] blur-[60px]"
+        style={{ animationDelay: "-3s", bottom: "5%", left: "0%" }} />
+
+      {/* Geometric ring accent */}
+      <div className="geo-ring w-[700px] h-[700px]"
+        style={{ top: "50%", right: "-10%", transform: "translateY(-50%)" }} />
 
       {/* 2-column grid */}
       <div className="relative z-10 h-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -147,6 +159,9 @@ export default function Hero() {
               </span>
             </span>
           </h1>
+
+          {/* Accent line */}
+          <div className="hero-line-accent w-0 h-[2px] bg-primary/30 rounded-full mb-6" />
 
           {/* Manifesto */}
           <div className="flex flex-col gap-2 mb-10 max-w-xl">

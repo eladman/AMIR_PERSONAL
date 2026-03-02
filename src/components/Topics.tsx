@@ -101,6 +101,12 @@ export default function Topics() {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const activeIcon = document.querySelector(`.topic-icon-${activeIndex}`);
+    if (!activeIcon) return;
+    gsap.from(activeIcon, { scale: 0.7, duration: 0.5, ease: "back.out(2)" });
+  }, [activeIndex]);
+
   return (
     <section id="topics" ref={containerRef} className="py-24 md:py-32 px-6 bg-background relative overflow-hidden">
       {/* Decorative background element */}
@@ -194,7 +200,7 @@ export default function Topics() {
 
                   <div className="relative z-10 transform transition-transform duration-700"
                        style={{ transform: isActive ? 'translateY(0)' : 'translateY(20px)' }}>
-                    <div className="w-16 h-16 bg-primary/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 text-primary transition-all duration-500 hover:scale-110 hover:bg-primary hover:text-secondary">
+                    <div className={`topic-icon-${index} w-16 h-16 bg-primary/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 text-primary transition-all duration-500 hover:scale-110 hover:bg-primary hover:text-secondary`}>
                       <Icon size={32} strokeWidth={2} />
                     </div>
 

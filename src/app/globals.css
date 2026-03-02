@@ -82,3 +82,41 @@
 .parallax-img-container img {
   will-change: transform;
 }
+
+/* Infinite marquee */
+.marquee-track { display: flex; width: max-content; will-change: transform; }
+.marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
+
+/* Background textures */
+.bg-dot-grid {
+  background-image: radial-gradient(circle, rgba(23,23,23,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.bg-crosshatch {
+  background-image:
+    linear-gradient(rgba(23,23,23,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23,23,23,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Ambient orb */
+.ambient-orb {
+  position: absolute; border-radius: 9999px; pointer-events: none;
+  animation: breathe 6s ease-in-out infinite; will-change: transform, opacity;
+}
+
+/* Rotating geometric ring */
+.geo-ring {
+  position: absolute; border-radius: 9999px; pointer-events: none;
+  border: 1.5px solid rgba(255,135,20,0.12);
+  animation: slow-spin 40s linear infinite; will-change: transform;
+}
+
+/* Shimmer on stat cards */
+.stat-card-shimmer { position: relative; overflow: hidden; }
+.stat-card-shimmer::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,135,20,0.12) 50%, transparent 60%);
+  transform: translateX(100%);
+  animation: shimmer 2.2s ease-in-out infinite;
+}

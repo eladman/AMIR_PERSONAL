@@ -34,6 +34,12 @@ export default function Closing() {
         { scale: 0.8, opacity: 0, duration: 0.8, ease: "back.out(1.7)" },
         "-=0.3"
       );
+
+      // Ring entrance
+      gsap.from(".closing-ring", {
+        scrollTrigger: { trigger: containerRef.current, start: "top 80%" },
+        scale: 0.3, opacity: 0, duration: 2, ease: "power3.out",
+      });
     }, containerRef);
 
     // Magnetic button effect
@@ -77,8 +83,24 @@ export default function Closing() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center text-center overflow-hidden bg-white"
     >
-      {/* Gradient mesh orb */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      {/* Crosshatch background texture */}
+      <div className="absolute inset-0 bg-crosshatch pointer-events-none" />
+
+      {/* Main ambient orb */}
+      <div className="ambient-orb w-[700px] h-[700px] bg-primary/[0.07] blur-[100px]"
+        style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+
+      {/* Concentric rotating rings */}
+      <div className="closing-ring geo-ring w-[500px] h-[500px]"
+        style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+      <div className="closing-ring geo-ring w-[750px] h-[750px]"
+        style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)", animationDirection: "reverse", animationDuration: "60s", borderColor: "rgba(23,23,23,0.05)" }} />
+
+      {/* Corner bracket accents */}
+      <div className="absolute top-8 right-8 w-16 h-16 border-t-2 border-r-2 border-primary/20 rounded-tr-lg" />
+      <div className="absolute top-8 left-8 w-16 h-16 border-t-2 border-l-2 border-primary/20 rounded-tl-lg" />
+      <div className="absolute bottom-8 right-8 w-16 h-16 border-b-2 border-r-2 border-primary/20 rounded-br-lg" />
+      <div className="absolute bottom-8 left-8 w-16 h-16 border-b-2 border-l-2 border-primary/20 rounded-bl-lg" />
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 flex flex-col items-center">

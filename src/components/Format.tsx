@@ -35,14 +35,23 @@ export default function Format() {
         stagger: 0.2,
         ease: "power2.out",
       });
+
+      // Parallax scrub
+      gsap.utils.toArray<HTMLElement>(".format-image").forEach((img, i) => {
+        gsap.to(img, {
+          y: i === 0 ? -40 : 40, ease: "none",
+          scrollTrigger: { trigger: containerRef.current, start: "top bottom", end: "bottom top", scrub: 1.5 },
+        });
+      });
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section id="format" ref={containerRef} className="py-24 md:py-32 px-6 bg-background text-secondary">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+    <section id="format" ref={containerRef} className="relative overflow-hidden py-24 md:py-32 px-6 bg-background text-secondary">
+      <div className="absolute inset-0 bg-dot-grid pointer-events-none opacity-60" />
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative z-10">
 
         {/* Content */}
         <div className="w-full lg:w-1/2 flex flex-col items-start">
@@ -63,21 +72,23 @@ export default function Format() {
 
         {/* Images Grid */}
         <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4 md:gap-6">
-          <div className="format-image relative aspect-square rounded-[2rem] overflow-hidden translate-y-8 shadow-xl">
+          <div className="format-image group relative aspect-square rounded-[2rem] overflow-hidden translate-y-8 shadow-xl">
             <Image
               src="/images/pic_3.jpeg"
               alt="תנועה וטבע"
               fill
-              className="object-cover"
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
+            <div className="absolute inset-0 bg-primary/10 mix-blend-multiply group-hover:opacity-0 transition-opacity duration-500" />
           </div>
-          <div className="format-image relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-xl">
+          <div className="format-image group relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-xl">
             <Image
               src="/images/pic_4.jpeg"
               alt="מפגש אנושי"
               fill
-              className="object-cover"
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
+            <div className="absolute inset-0 bg-primary/10 mix-blend-multiply group-hover:opacity-0 transition-opacity duration-500" />
           </div>
         </div>
 

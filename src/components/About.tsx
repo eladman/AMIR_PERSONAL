@@ -5,8 +5,15 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
+const stats = [
+  { value: 500, suffix: "+", label: "משתתפים בסדנאות" },
+  { value: 5,   suffix: "",  label: "תנועות שייסד" },
+  { value: 15,  suffix: "+", label: "שנות ניסיון" },
+];
+
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const statRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -34,14 +41,30 @@ export default function About() {
         duration: 1.2,
         ease: "power2.out",
       });
+
+      // Stat counters
+      stats.forEach((stat, i) => {
+        const proxy = { val: 0 };
+        gsap.to(proxy, {
+          val: stat.value, duration: 2, ease: "power2.out",
+          scrollTrigger: { trigger: containerRef.current, start: "top 75%", once: true },
+          onUpdate: () => {
+            const el = statRefs.current[i];
+            if (el) el.textContent = Math.round(proxy.val).toString();
+          },
+        });
+      });
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section id="about" ref={containerRef} className="py-24 md:py-32 px-6 bg-background">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16 lg:gap-24">
+    <section id="about" ref={containerRef} className="relative overflow-hidden py-24 md:py-32 px-6 bg-background">
+      <div className="absolute inset-0 bg-crosshatch pointer-events-none" />
+      <div className="ambient-orb w-[500px] h-[500px] bg-primary/[0.04] blur-[80px]"
+        style={{ top: "-5rem", left: "-5rem", animationDelay: "-1.5s" }} />
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16 lg:gap-24 relative z-10">
 
         {/* Image */}
         <div className="about-image w-full md:w-1/2 bg-gray-200 rounded-[3rem] p-3">
@@ -73,6 +96,19 @@ export default function About() {
           <p className="about-element text-lg md:text-xl leading-relaxed text-secondary/70 mt-6">
             בסדנה זו, עמיר ישתף בדרך שלו ובכלים הפרקטיים שמובילים אותו בחיים, ויעזור לכם למצוא את המצפן הפנימי שלכם כדי להתחיל לנוע קדימה.
           </p>
+
+          <div className="about-element grid grid-cols-3 gap-4 mt-10 w-full">
+            {stats.map((stat, i) => (
+              <div key={i} className="stat-card-shimmer relative flex flex-col items-center p-5 rounded-2xl border border-secondary/10 bg-white shadow-sm">
+                <span className="text-4xl md:text-5xl font-black text-secondary leading-none">
+                  <span ref={el => { statRefs.current[i] = el; }}>0</span>{stat.suffix}
+                </span>
+                <span className="mt-2 text-xs md:text-sm text-secondary/50 font-medium text-center leading-snug">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
 
         </div>
       </div>
