@@ -140,21 +140,21 @@ export default function Hero() {
       {/* 2-column grid */}
       <div className="relative z-10 h-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Text side */}
-        <div className="hero-content order-2 md:order-1 flex flex-col justify-center pb-20 md:pb-0">
+        <div className="hero-content order-2 md:order-1 flex flex-col justify-center">
           {/* Subtitle */}
           <p className="hero-subtitle text-primary text-sm md:text-base tracking-[0.3em] uppercase font-bold mb-6">
             הסדנה של עמיר מנחם
           </p>
 
           {/* Headline */}
-          <h1 className="mb-8">
+          <h1 className="mb-6 md:mb-8">
             <span className="split-line block">
-              <span className="hero-line-1 block text-secondary text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[0.9]">
+              <span className="hero-line-1 block text-secondary text-8xl sm:text-8xl md:text-8xl lg:text-[10rem] font-black leading-[0.9]">
                 מאפס
               </span>
             </span>
             <span className="split-line block">
-              <span className="hero-line-2 block text-primary text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[0.9]">
+              <span className="hero-line-2 block text-primary text-8xl sm:text-8xl md:text-8xl lg:text-[10rem] font-black leading-[0.9]">
                 לאחד
               </span>
             </span>
@@ -164,17 +164,17 @@ export default function Hero() {
           <div className="hero-line-accent w-0 h-[2px] bg-primary/30 rounded-full mb-6" />
 
           {/* Manifesto */}
-          <div className="flex flex-col gap-2 mb-10 max-w-xl">
-            <p className="hero-manifesto text-secondary/90 text-lg md:text-2xl font-medium">
+          <div className="flex flex-col gap-1 md:gap-2 mb-6 md:mb-10 max-w-xl">
+            <p className="hero-manifesto text-secondary/90 text-xl md:text-2xl font-medium">
               יש רגע בו אתה מבין.
             </p>
-            <p className="hero-manifesto text-secondary/60 text-base md:text-xl">
+            <p className="hero-manifesto text-secondary/60 text-lg md:text-xl">
               אף אחד לא יבוא לשנות לך את החיים.
             </p>
-            <p className="hero-manifesto text-secondary/60 text-base md:text-xl">
+            <p className="hero-manifesto text-secondary/60 text-lg md:text-xl">
               לא המדינה, לא הבוס, לא אלגוריתם.
             </p>
-            <p className="hero-manifesto text-primary text-lg md:text-2xl font-bold mt-1">
+            <p className="hero-manifesto text-primary text-xl md:text-2xl font-bold mt-1">
               רק אתה.
             </p>
           </div>
@@ -190,9 +190,9 @@ export default function Hero() {
         </div>
 
         {/* Image side — floating gallery */}
-        <div className="hero-images order-1 md:order-2 relative h-[40vh] md:h-[80vh] flex items-center justify-center">
+        <div className="hero-images hidden md:flex order-1 md:order-2 relative h-[45vh] md:h-[80vh] items-center justify-center">
           {/* Image 1 — main, centered-right */}
-          <div className="hero-float-img absolute top-[10%] right-[5%] md:right-[10%] w-[55%] md:w-[60%] aspect-[3/4] rounded-[2rem] overflow-hidden border border-secondary/10 shadow-[0_8px_40px_rgba(255,135,20,0.15)] group">
+          <div className="hero-float-img absolute top-[10%] right-[5%] md:right-[10%] w-[65%] md:w-[60%] aspect-[3/4] rounded-[2rem] overflow-hidden border border-secondary/10 shadow-[0_8px_40px_rgba(255,135,20,0.15)] group">
             <Image
               src="/images/pic_10.jpeg"
               alt="סדנה מאפס לאחד"
@@ -205,7 +205,7 @@ export default function Hero() {
           </div>
 
           {/* Image 2 — bottom-left, overlapping */}
-          <div className="hero-float-img absolute bottom-[5%] left-[0%] md:left-[5%] w-[45%] md:w-[45%] aspect-[4/3] rounded-[2rem] overflow-hidden border border-secondary/10 shadow-[0_8px_40px_rgba(255,135,20,0.12)] group">
+          <div className="hero-float-img absolute bottom-[5%] left-[0%] md:left-[5%] w-[50%] md:w-[45%] aspect-[4/3] rounded-[2rem] overflow-hidden border border-secondary/10 shadow-[0_8px_40px_rgba(255,135,20,0.12)] group">
             <Image
               src="/images/pic_8.jpeg"
               alt="אווירת הסדנה"
@@ -217,7 +217,7 @@ export default function Hero() {
           </div>
 
           {/* Image 3 — top-left, smaller accent */}
-          <div className="hero-float-img absolute top-[5%] left-[10%] md:left-[0%] w-[35%] md:w-[35%] aspect-[3/4] rounded-[2rem] overflow-hidden border border-secondary/10 shadow-[0_8px_40px_rgba(255,135,20,0.10)] group">
+          <div className="hero-float-img hidden sm:block absolute top-[5%] left-[10%] md:left-[0%] w-[35%] md:w-[35%] aspect-[3/4] rounded-[2rem] overflow-hidden border border-secondary/10 shadow-[0_8px_40px_rgba(255,135,20,0.10)] group">
             <Image
               src="/images/pic_7.jpeg"
               alt="אווירת הסדנה"

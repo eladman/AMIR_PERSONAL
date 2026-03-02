@@ -87,13 +87,13 @@ export default function Closing() {
       <div className="absolute inset-0 bg-crosshatch pointer-events-none" />
 
       {/* Main ambient orb */}
-      <div className="ambient-orb w-[700px] h-[700px] bg-primary/[0.07] blur-[100px]"
+      <div className="ambient-orb w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-primary/[0.07] blur-[100px]"
         style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
 
       {/* Concentric rotating rings */}
-      <div className="closing-ring geo-ring w-[500px] h-[500px]"
+      <div className="closing-ring geo-ring w-[300px] md:w-[500px] h-[300px] md:h-[500px]"
         style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
-      <div className="closing-ring geo-ring w-[750px] h-[750px]"
+      <div className="closing-ring geo-ring w-[450px] md:w-[750px] h-[450px] md:h-[750px]"
         style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)", animationDirection: "reverse", animationDuration: "60s", borderColor: "rgba(23,23,23,0.05)" }} />
 
       {/* Corner bracket accents */}
@@ -114,7 +114,7 @@ export default function Closing() {
           הכל יתחיל להשתנות בטווח הארוך.
         </p>
 
-        <p className="closing-text text-secondary/50 text-lg md:text-xl font-medium mb-16 max-w-2xl">
+        <p className="closing-text text-secondary/50 text-lg md:text-xl font-medium mb-10 md:mb-16 max-w-2xl">
           אם אתה מוכן לקחת אחריות על החיים שלך ולא לחכות שמישהו יגדיר אותם
           עבורך — זה המקום.
         </p>
@@ -122,7 +122,7 @@ export default function Closing() {
         <a
           ref={btnRef}
           href="#"
-          className="closing-cta group relative inline-flex overflow-hidden bg-primary text-secondary px-12 py-6 rounded-full text-xl md:text-2xl font-black shadow-2xl shadow-primary/30 transition-shadow hover:shadow-primary/50"
+          className="closing-cta group relative inline-flex overflow-hidden bg-primary text-secondary px-8 py-4 md:px-12 md:py-6 rounded-full text-xl md:text-2xl font-black shadow-2xl shadow-primary/30 transition-shadow hover:shadow-primary/50"
         >
           <span className="relative z-10 flex items-center gap-3 text-[rgba(255,255,240,1)]">
             אני רוצה להירשם

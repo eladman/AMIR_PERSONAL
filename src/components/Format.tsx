@@ -72,7 +72,7 @@ export default function Format() {
 
         {/* Images Grid */}
         <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4 md:gap-6">
-          <div className="format-image group relative aspect-square rounded-[2rem] overflow-hidden translate-y-8 shadow-xl">
+          <div className="format-image group relative aspect-square rounded-[2rem] overflow-hidden lg:translate-y-8 shadow-xl">
             <Image
               src="/images/pic_3.jpeg"
               alt="תנועה וטבע"

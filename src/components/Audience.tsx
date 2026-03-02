@@ -89,7 +89,7 @@ export default function Audience() {
         </div>
 
         {/* Decorative background text */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[200px] md:text-[300px] font-black text-secondary/[0.025] leading-none select-none pointer-events-none whitespace-nowrap" aria-hidden="true">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[120px] md:text-[200px] lg:text-[300px] font-black text-secondary/[0.025] leading-none select-none pointer-events-none whitespace-nowrap" aria-hidden="true">
           עשייה
         </div>
 
@@ -98,7 +98,7 @@ export default function Audience() {
           {audienceList.map((item, index) => (
             <div
               key={index}
-              className="audience-item group flex items-center gap-6 md:gap-10 py-8 md:py-10 border-b border-secondary/10 hover:border-primary/30 transition-colors cursor-default"
+              className="audience-item group flex items-center gap-4 md:gap-6 lg:gap-10 py-6 md:py-8 lg:py-10 border-b border-secondary/10 hover:border-primary/30 transition-colors cursor-default"
             >
               {/* Large faded number */}
               <span className="audience-number text-5xl md:text-7xl font-black text-secondary/10 group-hover:text-primary/40 transition-colors duration-300 shrink-0 w-20 md:w-28 text-center">

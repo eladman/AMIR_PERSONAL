@@ -27,7 +27,7 @@ export default function Footer() {
           <p className="text-secondary/60 text-sm font-medium">מאפס לאחד - סדנה אישית</p>
         </div>
 
-        <div className="footer-el flex items-center gap-6 text-secondary/60 text-sm font-medium">
+        <div className="footer-el flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-6 text-secondary/60 text-sm font-medium">
           <a href="#about" className="hover:text-primary transition-colors">מי זה עמיר?</a>
           <a href="#topics" className="hover:text-primary transition-colors">על מה נעבוד?</a>
           <a href="#format" className="hover:text-primary transition-colors">המפגש</a>

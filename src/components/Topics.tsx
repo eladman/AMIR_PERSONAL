@@ -121,7 +121,7 @@ export default function Topics() {
               <span className="w-12 h-[2px] bg-primary rounded-full"></span>
               על מה נעבוד?
             </h2>
-            <h3 className="topic-title-anim text-5xl md:text-6xl lg:text-7xl font-black text-secondary leading-[1.1]">
+            <h3 className="topic-title-anim text-4xl md:text-5xl lg:text-7xl font-black text-secondary leading-[1.1]">
               הכלים שייקחו <br />
               אותך <span className="text-primary relative inline-block">
                 לשלב הבא
@@ -135,7 +135,7 @@ export default function Topics() {
             </p>
 
             {/* Navigation Controls */}
-            <div className="topic-title-anim flex items-center gap-4 mt-10">
+            <div className="topic-title-anim flex items-center gap-2 md:gap-4 mt-10">
               {/* In RTL, Right chevron is Previous, Left chevron is Next */}
               <button
                 onClick={handlePrev}
@@ -163,7 +163,7 @@ export default function Topics() {
         </div>
 
         {/* Left Column - Card Stack */}
-        <div className="lg:w-7/12 relative stack-container h-[450px] md:h-[500px] w-full mt-10 lg:mt-0">
+        <div className="lg:w-7/12 relative stack-container h-[380px] md:h-[450px] lg:h-[500px] w-full mt-10 lg:mt-0">
           <div className="relative w-full h-full max-w-lg mx-auto lg:mr-auto lg:ml-0">
             {topics.map((topic, index) => {
               const Icon = topic.icon;
@@ -179,7 +179,7 @@ export default function Topics() {
                       setActiveIndex(index);
                     }
                   }}
-                  className={`absolute inset-0 bg-secondary rounded-[2.5rem] p-8 md:p-12 shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.2,1)] flex flex-col justify-center overflow-hidden
+                  className={`absolute inset-0 bg-secondary rounded-[2.5rem] p-6 md:p-8 lg:p-12 shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.2,1)] flex flex-col justify-center overflow-hidden
                     ${offset > 0 ? 'cursor-pointer hover:bg-[#000042]' : ''}
                   `}
                   style={{
@@ -193,22 +193,22 @@ export default function Topics() {
                   }}
                 >
                   {/* Faint Background Number */}
-                  <div className="absolute -top-8 left-4 text-[160px] md:text-[220px] font-black text-white/5 leading-none select-none pointer-events-none transition-transform duration-700"
+                  <div className="absolute -top-8 left-4 text-[120px] md:text-[160px] lg:text-[220px] font-black text-white/5 leading-none select-none pointer-events-none transition-transform duration-700"
                        style={{ transform: isActive ? 'scale(1)' : 'scale(0.9)' }}>
                     0{index + 1}
                   </div>
 
                   <div className="relative z-10 transform transition-transform duration-700"
                        style={{ transform: isActive ? 'translateY(0)' : 'translateY(20px)' }}>
-                    <div className={`topic-icon-${index} w-16 h-16 bg-primary/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 text-primary transition-all duration-500 hover:scale-110 hover:bg-primary hover:text-secondary`}>
+                    <div className={`topic-icon-${index} w-12 h-12 md:w-16 md:h-16 bg-primary/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 md:mb-8 text-primary transition-all duration-500 hover:scale-110 hover:bg-primary hover:text-secondary`}>
                       <Icon size={32} strokeWidth={2} />
                     </div>
 
-                    <h4 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+                    <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white">
                       {topic.title}
                     </h4>
 
-                    <p className="text-xl text-white/70 leading-relaxed font-light">
+                    <p className="text-base md:text-xl text-white/70 leading-relaxed font-light">
                       {topic.description}
                     </p>
                   </div>
