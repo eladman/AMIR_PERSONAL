@@ -36,13 +36,15 @@ export default function Format() {
         ease: "power2.out",
       });
 
-      // Parallax scrub
-      gsap.utils.toArray<HTMLElement>(".format-image").forEach((img, i) => {
-        gsap.to(img, {
-          y: i === 0 ? -40 : 40, ease: "none",
-          scrollTrigger: { trigger: containerRef.current, start: "top bottom", end: "bottom top", scrub: 1.5 },
+      // Parallax scrub — desktop only
+      if (window.innerWidth >= 768) {
+        gsap.utils.toArray<HTMLElement>(".format-image").forEach((img, i) => {
+          gsap.to(img, {
+            y: i === 0 ? -40 : 40, ease: "none",
+            scrollTrigger: { trigger: containerRef.current, start: "top bottom", end: "bottom top", scrub: 1.5 },
+          });
         });
-      });
+      }
     }, containerRef);
 
     return () => ctx.revert();

@@ -44,7 +44,7 @@ export default function RootLayout({
     <html lang="he" dir="rtl">
       <body className={`${heebo.variable} font-sans antialiased bg-background text-foreground overflow-x-hidden`}>
         <svg
-          className="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.03] mix-blend-soft-light"
+          className="hidden md:block pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.03] mix-blend-soft-light"
           aria-hidden="true"
         >
           <filter id="noise">

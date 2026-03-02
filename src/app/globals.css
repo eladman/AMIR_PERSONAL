@@ -140,4 +140,7 @@
   .marquee-track {
     will-change: auto;
   }
+  .parallax-img-container img {
+    will-change: auto;
+  }
 }

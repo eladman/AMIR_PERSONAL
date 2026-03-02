@@ -56,7 +56,7 @@ export default function Navbar() {
       >
         <nav
           ref={navRef}
-          className="pointer-events-auto flex items-center justify-between w-full max-w-4xl px-5 py-2 rounded-full transition-all duration-500 bg-white/60 backdrop-blur-md text-secondary border border-secondary/10 [&.nav-scrolled]:bg-white/90 [&.nav-scrolled]:backdrop-blur-xl [&.nav-scrolled]:border-secondary/10 [&.nav-scrolled]:shadow-sm [&.nav-scrolled]:py-1.5"
+          className="pointer-events-auto flex items-center justify-between w-full max-w-4xl px-5 py-2 rounded-full transition-all duration-500 bg-white/80 md:bg-white/60 md:backdrop-blur-md text-secondary border border-secondary/10 [&.nav-scrolled]:bg-white/95 [&.nav-scrolled]:md:bg-white/90 [&.nav-scrolled]:md:backdrop-blur-xl [&.nav-scrolled]:border-secondary/10 [&.nav-scrolled]:shadow-sm [&.nav-scrolled]:py-1.5"
         >
           {/* Logo */}
           <Link href="/" className="font-black text-lg tracking-tight">
@@ -118,7 +118,7 @@ export default function Navbar() {
 
       {/* Mobile menu overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+        <div className="fixed inset-0 z-40 bg-white flex flex-col items-center justify-center gap-8">
           {[
             { href: "#about", label: "על עמיר" },
             { href: "#topics", label: "הסדנה" },

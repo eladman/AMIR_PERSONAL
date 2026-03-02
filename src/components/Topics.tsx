@@ -110,7 +110,7 @@ export default function Topics() {
   return (
     <section id="topics" ref={containerRef} className="py-24 md:py-32 px-6 bg-background relative overflow-hidden">
       {/* Decorative background element */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+      <div className="hidden md:block absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 relative z-10 items-center">
 
@@ -200,7 +200,7 @@ export default function Topics() {
 
                   <div className="relative z-10 transform transition-transform duration-700"
                        style={{ transform: isActive ? 'translateY(0)' : 'translateY(20px)' }}>
-                    <div className={`topic-icon-${index} w-12 h-12 md:w-16 md:h-16 bg-primary/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 md:mb-8 text-primary transition-all duration-500 hover:scale-110 hover:bg-primary hover:text-secondary`}>
+                    <div className={`topic-icon-${index} w-12 h-12 md:w-16 md:h-16 bg-primary/20 rounded-2xl flex items-center justify-center mb-4 md:mb-8 text-primary transition-all duration-500 hover:scale-110 hover:bg-primary hover:text-secondary`}>
                       <Icon size={32} strokeWidth={2} />
                     </div>
 
