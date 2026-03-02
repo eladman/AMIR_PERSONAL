@@ -12,7 +12,16 @@ export default function Hero() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      // Pre-set initial states — prevents flash before timeline reaches each element
+      gsap.set(".hero-float-img", { y: 80, opacity: 0 });
+      gsap.set(".hero-line-1", { yPercent: 100 });
+      gsap.set(".hero-line-2", { yPercent: 100 });
+      gsap.set(".hero-subtitle", { y: 20, opacity: 0 });
+      gsap.set(".hero-manifesto", { y: 30, opacity: 0 });
+      gsap.set(".hero-cta", { y: 20, opacity: 0 });
+      gsap.set(".hero-scroll-indicator", { opacity: 0 });
+
+      const tl = gsap.timeline({ defaults: { ease: "power3.out", force3D: true } });
 
       // Floating images entrance — slide up + fade
       tl.from(".hero-float-img", {
@@ -64,15 +73,17 @@ export default function Hero() {
         "-=0.5"
       );
 
-      // Continuous float/rotate loops for images
+      // Continuous float loops for images — rotation skipped on mobile (too expensive)
+      const isMobile = window.innerWidth < 768;
       gsap.utils.toArray<HTMLElement>(".hero-float-img").forEach((img, i) => {
         gsap.to(img, {
-          y: `${i % 2 === 0 ? "-" : ""}12`,
-          rotation: i % 2 === 0 ? 1.5 : -1.5,
+          y: `${i % 2 === 0 ? "-" : ""}${isMobile ? 6 : 12}`,
+          ...(isMobile ? {} : { rotation: i % 2 === 0 ? 1.5 : -1.5 }),
           duration: 3 + i * 0.5,
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true,
+          overwrite: "auto",
         });
       });
 

@@ -112,6 +112,13 @@
   animation: slow-spin 40s linear infinite; will-change: transform;
 }
 
+/* Hero GPU acceleration */
+.hero-float-img,
+.hero-line-1,
+.hero-line-2 {
+  will-change: transform, opacity;
+}
+
 /* Shimmer on stat cards */
 .stat-card-shimmer { position: relative; overflow: hidden; }
 .stat-card-shimmer::after {
