@@ -9,8 +9,16 @@ const heebo = Heebo({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://meepes-leechad.com"),
   title: "מאפס לאחד | עמיר מנחם",
   description: "סדנה אישית אינטנסיבית של עמיר מנחם שתעזור לך לקחת את הרעיון שלך ולהפוך אותו למציאות.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/icon.svg",
+  },
   openGraph: {
     title: "מאפס לאחד | עמיר מנחם",
     description: "סדנה אישית אינטנסיבית שתעזור לך לקחת את הרעיון שלך ולהפוך אותו למציאות.",
