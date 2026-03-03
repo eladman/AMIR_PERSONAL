@@ -10,10 +10,10 @@ const heebo = Heebo({
 
 export const metadata: Metadata = {
   title: "מאפס לאחד | עמיר מנחם",
-  description: "סדנה אישית אינטנסיבית של עמיר מנחם שתעזור לך לקחת את הרעיון שלך ולהפוך אותו למציאות.",
+  description: "סדנה לאנשים שמרגישים שיכולים יותר ומחפשים לא רק תוכן אלא דרך",
   openGraph: {
     title: "מאפס לאחד | עמיר מנחם",
-    description: "סדנה אישית אינטנסיבית שתעזור לך לקחת את הרעיון שלך ולהפוך אותו למציאות.",
+    description: "סדנה לאנשים שמרגישים שיכולים יותר ומחפשים לא רק תוכן אלא דרך",
     url: "https://meepes-leechad.com",
     siteName: "מאפס לאחד",
     images: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "מאפס לאחד | עמיר מנחם",
-    description: "סדנה אישית אינטנסיבית שתעזור לך לקחת את הרעיון שלך ולהפוך אותו למציאות.",
+    description: "סדנה לאנשים שמרגישים שיכולים יותר ומחפשים לא רק תוכן אלא דרך",
     images: ["/images/pic_2.jpeg"],
   },
 };
