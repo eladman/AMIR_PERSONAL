@@ -3,53 +3,23 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  TrendingUp,
-  Target,
-  Shield,
-  Lightbulb,
-  Activity,
-  Users,
-  ChevronLeft,
-  ChevronRight
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const topics = [
   {
     id: 1,
-    title: "בניית תנועה ארוכת טווח",
-    description: 'איך מפסיקים לחיות "מעכשיו לעכשיו" ומתחילים לבנות תנועה ארוכת טווח?',
-    icon: TrendingUp,
+    title: "קבלת החלטות",
+    description: "איך מקבלים החלטות מתוך הסתכלות פנימית",
   },
   {
     id: 2,
-    title: "אזור ההרמוניה האישי",
-    description: "איך מוצאים את אזור ההרמוניה האישי שלך? — מודל האיקיגאי",
-    icon: Target,
+    title: "מודל לבניית רעיון מארגן",
+    description: "איך עושים בחירות שמובילות אותי למקומות של צמיחה ושגשוג",
   },
   {
     id: 3,
-    title: "בניית סנטר חזק",
-    description: "איך בונים סנטר חזק — הלימה בין מחשבה, דיבור ולב",
-    icon: Shield,
-  },
-  {
-    id: 4,
-    title: "נבונים מול חכמים",
-    description: "למה אנשים נבונים חשובים יותר מחכמים?",
-    icon: Lightbulb,
-  },
-  {
-    id: 5,
-    title: "אימון כדרך חיים",
-    description: "איך להפוך אימון יומיומי לדרך חיים",
-    icon: Activity,
-  },
-  {
-    id: 6,
-    title: "עשייה למען אחרים",
-    description: "למה התכלית האמיתית קשורה תמיד בעשייה למען אחרים",
-    icon: Users,
+    title: "תובנות וכלים",
+    description: "יזמות, השפעה, ואורח חיים פרואקטיבי במציאות משתנה",
   },
 ];
 
@@ -101,11 +71,6 @@ export default function Topics() {
     return () => ctx.revert();
   }, []);
 
-  useEffect(() => {
-    const activeIcon = document.querySelector(`.topic-icon-${activeIndex}`);
-    if (!activeIcon) return;
-    gsap.from(activeIcon, { scale: 0.7, duration: 0.5, ease: "back.out(2)" });
-  }, [activeIndex]);
 
   return (
     <section id="topics" ref={containerRef} className="py-24 md:py-32 px-6 bg-background relative overflow-hidden">
@@ -163,10 +128,9 @@ export default function Topics() {
         </div>
 
         {/* Left Column - Card Stack */}
-        <div className="lg:w-7/12 relative stack-container h-[380px] md:h-[450px] lg:h-[500px] w-full mt-10 lg:mt-0">
+        <div className="lg:w-7/12 relative stack-container h-[420px] md:h-[480px] lg:h-[520px] w-full mt-10 lg:mt-0">
           <div className="relative w-full h-full max-w-lg mx-auto lg:mr-auto lg:ml-0">
             {topics.map((topic, index) => {
-              const Icon = topic.icon;
               const offset = index - activeIndex;
               const isActive = offset === 0;
               const isPast = offset < 0;
@@ -200,15 +164,13 @@ export default function Topics() {
 
                   <div className="relative z-10 transform transition-transform duration-700"
                        style={{ transform: isActive ? 'translateY(0)' : 'translateY(20px)' }}>
-                    <div className={`topic-icon-${index} w-12 h-12 md:w-16 md:h-16 bg-primary/20 rounded-2xl flex items-center justify-center mb-4 md:mb-8 text-primary transition-all duration-500 hover:scale-110 hover:bg-primary hover:text-secondary`}>
-                      <Icon size={32} strokeWidth={2} />
-                    </div>
+                    <div className="mb-4 md:mb-6 w-10 h-[3px] bg-primary rounded-full" />
 
-                    <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white">
+                    <h4 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white leading-tight">
                       {topic.title}
                     </h4>
 
-                    <p className="text-base md:text-xl text-white/70 leading-relaxed font-light">
+                    <p className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed font-medium">
                       {topic.description}
                     </p>
                   </div>

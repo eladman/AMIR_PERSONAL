@@ -54,12 +54,12 @@ export default function About() {
           </h2>
 
           <h3 className="about-element text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight">
-            יזם סדרתי, <br/>
+            יזם סדרתי, <br />
             <span className="text-secondary/70">איש של עשייה.</span>
           </h3>
 
           <p className="about-element text-xl md:text-2xl leading-relaxed text-secondary/80 font-medium">
-            עמיר מנחם, יזם סדרתי שייסד את תנועת <span className="text-primary font-bold">חמש אצבעות</span>, תוכנית יואב ועוד מיזמים ופרויקטים רבים.
+            עמיר מנחם, יזם סדרתי שייסד את תנועת <span className="text-primary font-bold">חמש אצבעות</span>, תוכנית יואב ועוד מיזמים ופרויקטים רבים. עם למעלה מ-1,000 הרצאות בכל רחבי הארץ ובעל הפודקאסט ״חמש אצבעות״ עם אלפי האזנות
           </p>
 
           <p className="about-element text-lg md:text-xl leading-relaxed text-secondary/70 mt-6">

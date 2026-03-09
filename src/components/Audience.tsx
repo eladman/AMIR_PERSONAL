@@ -5,9 +5,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const audienceList = [
+  "לאנשים שרוצים להוביל ולהשפיע ",
+  "לאנשים שלא מחפשים רק תוכן, אלא דרך ",
   "לאנשים שמרגישים שהם יכולים יותר",
-  "לאנשים שלא מחפשים עוד תוכן — אלא דרך",
-  "לאנשים שמבינים שהעתיד לא יציב, ולכן צריך לבנות יציבות פנימית",
 ];
 
 export default function Audience() {
@@ -86,11 +86,6 @@ export default function Audience() {
             האם המקום הזה{" "}
             <span className="text-primary">עבורך?</span>
           </h3>
-        </div>
-
-        {/* Decorative background text */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[120px] md:text-[200px] lg:text-[300px] font-black text-secondary/[0.025] leading-none select-none pointer-events-none whitespace-nowrap" aria-hidden="true">
-          עשייה
         </div>
 
         {/* Line-style items */}

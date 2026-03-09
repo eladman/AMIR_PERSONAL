@@ -18,7 +18,7 @@ export default function Hero() {
       // Reveal elements — runs synchronously before .from() sets opacity:0/transforms,
       // so no flash occurs (browser doesn't repaint mid-JS-execution)
       gsap.set(
-        ".hero-float-img, .hero-subtitle, .hero-manifesto, .hero-cta, .hero-scroll-indicator, .hero-line-1, .hero-line-2",
+        ".hero-float-img, .hero-subtitle, .hero-tagline, .hero-manifesto, .hero-cta, .hero-scroll-indicator, .hero-line-1, .hero-line-2",
         { visibility: "visible" }
       );
 
@@ -46,11 +46,18 @@ export default function Hero() {
         "-=0.7"
       );
 
-      // Subtitle
+      // Subtitle (above title)
       tl.from(
         ".hero-subtitle",
         { y: 20, opacity: 0, duration: 0.8 },
         "-=0.5"
+      );
+
+      // Tagline (below title)
+      tl.from(
+        ".hero-tagline",
+        { y: 15, opacity: 0, duration: 0.7 },
+        "-=0.4"
       );
 
       // Manifesto stagger
@@ -182,6 +189,11 @@ export default function Hero() {
             </span>
           </h1>
 
+          {/* Subtitle tagline */}
+          <p className="hero-tagline text-secondary/50 text-lg md:text-2xl font-light mb-6 md:mb-8 tracking-wide">
+            איך הופכים שאיפות למעשים...
+          </p>
+
           {/* Accent line */}
           <div className="hero-line-accent w-0 h-[2px] bg-primary/30 rounded-full mb-6" />
 
@@ -197,19 +209,23 @@ export default function Hero() {
               לא המדינה, לא הבוס, לא אלגוריתם.
             </p>
             <p className="hero-manifesto text-primary text-xl md:text-2xl font-bold mt-1">
-              רק אתה.
+              טל הדר, כפר מונש - עמק חפר
             </p>
           </div>
 
-          {/* Date & Location badge */}
+          {/* Date, Time & Location badge */}
           <div className="hero-manifesto flex flex-wrap items-center gap-3 mb-6">
             <span className="inline-flex items-center gap-2 bg-secondary/5 border border-secondary/10 rounded-full px-4 py-2 text-sm font-bold text-secondary/80">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
               10.4.2026
             </span>
+            <span className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 text-sm font-bold text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              09:00 – 14:30
+            </span>
             <span className="inline-flex items-center gap-2 bg-secondary/5 border border-secondary/10 rounded-full px-4 py-2 text-sm font-bold text-secondary/80">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              עמק חפר
+              טל הדר, כפר מונש - עמק חפר
             </span>
           </div>
 

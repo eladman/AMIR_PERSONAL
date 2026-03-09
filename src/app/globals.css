@@ -76,6 +76,7 @@
 /* Prevent flash of content before GSAP animations initialize */
 .hero-float-img,
 .hero-subtitle,
+.hero-tagline,
 .hero-manifesto,
 .hero-cta,
 .hero-scroll-indicator,
