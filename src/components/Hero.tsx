@@ -170,11 +170,6 @@ export default function Hero() {
       <div className="relative z-10 h-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Text side */}
         <div className="hero-content order-2 md:order-1 flex flex-col justify-center">
-          {/* Subtitle */}
-          <p className="hero-subtitle text-primary text-sm md:text-base tracking-[0.3em] uppercase font-bold mb-6">
-            הסדנה של עמיר מנחם
-          </p>
-
           {/* Headline */}
           <h1 className="mb-6 md:mb-8">
             <span className="split-line block">
@@ -244,7 +239,7 @@ export default function Hero() {
           {/* Image 1 — main, centered-right */}
           <div className="hero-float-img absolute top-[10%] right-[5%] md:right-[10%] w-[65%] md:w-[60%] aspect-[3/4] rounded-[2rem] overflow-hidden border border-secondary/10 shadow-[0_8px_40px_rgba(255,135,20,0.15)] group">
             <Image
-              src="/images/pic_10.jpeg"
+              src="/images/MainScroll.jpeg"
               alt="סדנה מאפס לאחד"
               fill
               className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-[transform,filter] duration-700 scale-105 group-hover:scale-100"
