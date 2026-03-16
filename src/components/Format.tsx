@@ -1,12 +1,39 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
+const CAROUSEL_IMAGES = [
+  { src: "/images/MainScroll.jpeg", alt: "Globes 40x40 cover" },
+  { src: "/images/pic_3.jpeg", alt: "תנועה וטבע" },
+  { src: "/images/pic_4.jpeg", alt: "מפגש אנושי" },
+  { src: "/images/pic_12.jpeg", alt: "אווירת הסדנה" },
+];
+
 export default function Format() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const goTo = useCallback((index: number) => {
+    setActiveIndex((index + CAROUSEL_IMAGES.length) % CAROUSEL_IMAGES.length);
+  }, []);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      // RTL: swipe left (positive diff) = next, swipe right = prev
+      goTo(activeIndex + (diff > 0 ? 1 : -1));
+    }
+  }, [activeIndex, goTo]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -24,7 +51,7 @@ export default function Format() {
         ease: "power3.out",
       });
 
-      gsap.from(".format-image", {
+      gsap.from(".format-carousel", {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 60%",
@@ -32,19 +59,34 @@ export default function Format() {
         scale: 0.9,
         opacity: 0,
         duration: 1.2,
-        stagger: 0.2,
         ease: "power2.out",
       });
 
-      // Parallax scrub — desktop only
-      if (window.innerWidth >= 768) {
-        gsap.utils.toArray<HTMLElement>(".format-image").forEach((img, i) => {
-          gsap.to(img, {
-            y: i === 0 ? -40 : 40, ease: "none",
-            scrollTrigger: { trigger: containerRef.current, start: "top bottom", end: "bottom top", scrub: 1.5 },
-          });
+      // Desktop grid images — entrance + parallax
+      gsap.from(".format-image", {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 60%",
+        },
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power2.out",
+      });
+
+      gsap.utils.toArray<HTMLElement>(".format-image").forEach((img) => {
+        gsap.to(img, {
+          scrollTrigger: {
+            trigger: img,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+          y: -30,
+          ease: "none",
         });
-      }
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -96,25 +138,63 @@ export default function Format() {
           </div>
         </div>
 
-        {/* Images Grid */}
-        <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4 md:gap-6">
-          <div className="format-image group relative aspect-square rounded-[2rem] overflow-hidden lg:translate-y-8 shadow-xl">
+        {/* Mobile Carousel — hidden on desktop */}
+        <div className="format-carousel w-full lg:hidden relative">
+          <div
+            className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="flex h-full transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(${activeIndex * 100}%)` }}
+            >
+              {CAROUSEL_IMAGES.map((img, i) => (
+                <div key={i} className="relative w-full h-full shrink-0">
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover"
+                    priority={i === 0}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Dot indicators */}
+          <div className="flex justify-center gap-2 mt-4">
+            {CAROUSEL_IMAGES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 ${
+                  i === activeIndex ? "bg-primary" : "bg-secondary/20"
+                }`}
+                aria-label={`תמונה ${i + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Grid — hidden on mobile */}
+        <div className="hidden lg:grid grid-cols-2 gap-4 lg:w-1/2">
+          <div className="format-image relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl group">
             <Image
               src="/images/pic_3.jpeg"
               alt="תנועה וטבע"
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-primary/10 mix-blend-multiply group-hover:opacity-0 transition-opacity duration-500" />
           </div>
-          <div className="format-image group relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-xl">
+          <div className="format-image relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl group">
             <Image
               src="/images/pic_4.jpeg"
               alt="מפגש אנושי"
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-primary/10 mix-blend-multiply group-hover:opacity-0 transition-opacity duration-500" />
           </div>
         </div>
 
