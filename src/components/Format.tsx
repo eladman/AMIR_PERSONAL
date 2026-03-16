@@ -146,8 +146,9 @@ export default function Format() {
             onTouchEnd={handleTouchEnd}
           >
             <div
+              dir="ltr"
               className="flex h-full transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(${activeIndex * 100}%)` }}
+              style={{ transform: `translateX(${-activeIndex * 100}%)` }}
             >
               {CAROUSEL_IMAGES.map((img, i) => (
                 <div key={i} className="relative w-full h-full shrink-0">
