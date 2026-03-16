@@ -30,8 +30,8 @@ export default function Format() {
     touchEndX.current = e.changedTouches[0].clientX;
     const diff = touchStartX.current - touchEndX.current;
     if (Math.abs(diff) > 50) {
-      // RTL: swipe left (positive diff) = next, swipe right = prev
-      goTo(activeIndex + (diff > 0 ? 1 : -1));
+      // Swipe left (positive diff) = prev, swipe right = next
+      goTo(activeIndex + (diff > 0 ? -1 : 1));
     }
   }, [activeIndex, goTo]);
 
