@@ -114,7 +114,7 @@ export default function Format() {
               </div>
               <div>
                 <p className="text-sm text-secondary/50 font-medium">מתי?</p>
-                <p className="text-xl font-bold">10.4.2026 | יום שישי</p>
+                <p className="text-xl font-bold">19.06.2026 | יום שישי</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -132,7 +132,7 @@ export default function Format() {
               </div>
               <div>
                 <p className="text-sm text-secondary/50 font-medium">איפה?</p>
-                <p className="text-xl font-bold">טל הדר, כפר מונש - עמק חפר</p>
+                <p className="text-xl font-bold">הפגודה, שדות ים</p>
               </div>
             </div>
           </div>
@@ -170,9 +170,8 @@ export default function Format() {
               <button
                 key={i}
                 onClick={() => setActiveIndex(i)}
-                className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 ${
-                  i === activeIndex ? "bg-primary" : "bg-secondary/20"
-                }`}
+                className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 ${i === activeIndex ? "bg-primary" : "bg-secondary/20"
+                  }`}
                 aria-label={`תמונה ${i + 1}`}
               />
             ))}

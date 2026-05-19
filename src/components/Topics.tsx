@@ -13,12 +13,12 @@ const topics = [
   },
   {
     id: 2,
-    title: "מודל לבניית רעיון מארגן",
+    title: "דיוק עצמי עבור האדם שאני רוצה להיות",
     description: "איך עושים בחירות שמובילות אותי למקומות של צמיחה ושגשוג",
   },
   {
     id: 3,
-    title: "תובנות וכלים",
+    title: "כלים פרקטים למנהיגות אישית וחברתית",
     description: "יזמות, השפעה, ואורח חיים פרואקטיבי במציאות משתנה",
   },
 ];
@@ -158,12 +158,12 @@ export default function Topics() {
                 >
                   {/* Faint Background Number */}
                   <div className="absolute -top-8 left-4 text-[120px] md:text-[160px] lg:text-[220px] font-black text-white/5 leading-none select-none pointer-events-none transition-transform duration-700"
-                       style={{ transform: isActive ? 'scale(1)' : 'scale(0.9)' }}>
+                    style={{ transform: isActive ? 'scale(1)' : 'scale(0.9)' }}>
                     0{index + 1}
                   </div>
 
                   <div className="relative z-10 transform transition-transform duration-700"
-                       style={{ transform: isActive ? 'translateY(0)' : 'translateY(20px)' }}>
+                    style={{ transform: isActive ? 'translateY(0)' : 'translateY(20px)' }}>
                     <div className="mb-4 md:mb-6 w-10 h-[3px] bg-primary rounded-full" />
 
                     <h4 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white leading-tight">
