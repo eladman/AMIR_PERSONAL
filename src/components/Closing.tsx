@@ -138,7 +138,9 @@ export default function Closing() {
 
         <Link
           ref={btnRef}
-          href="/register"
+          href="https://zygo.co.il/event/710553243573321580/ZF10o46f2"
+          target="_blank"
+          rel="noopener noreferrer"
           className="closing-cta group relative inline-flex overflow-hidden bg-primary text-secondary px-8 py-4 md:px-12 md:py-6 rounded-full text-xl md:text-2xl font-black shadow-2xl shadow-primary/30 transition-shadow hover:shadow-primary/50"
         >
           <span className="relative z-10 flex items-center gap-3 text-[rgba(255,255,240,1)]">

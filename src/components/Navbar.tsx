@@ -86,7 +86,9 @@ export default function Navbar() {
 
           {/* CTA */}
           <Link
-            href="/register"
+            href="https://zygo.co.il/event/710553243573321580/ZF10o46f2"
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden md:inline-flex group relative overflow-hidden bg-primary text-white px-5 py-1.5 rounded-full text-sm font-bold transition-transform hover:scale-[1.03] active:scale-95"
           >
             <span className="relative z-10">להרשמה</span>
@@ -125,7 +127,7 @@ export default function Navbar() {
             { href: "#about", label: "על עמיר" },
             { href: "#topics", label: "הסדנה" },
             { href: "#format", label: "המפגש" },
-            { href: "/register", label: "הצטרף עכשיו" },
+            { href: "https://zygo.co.il/event/710553243573321580/ZF10o46f2", label: "הצטרף עכשיו" },
           ].map((link) => (
             <Link
               key={link.href}

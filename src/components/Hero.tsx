@@ -226,7 +226,9 @@ export default function Hero() {
 
           {/* CTA */}
           <Link
-            href="/register"
+            href="https://zygo.co.il/event/710553243573321580/ZF10o46f2"
+            target="_blank"
+            rel="noopener noreferrer"
             className="hero-cta group relative inline-flex overflow-hidden bg-primary text-white px-8 py-4 rounded-full text-lg md:text-xl font-bold transition-transform hover:scale-[1.03] active:scale-95 w-fit"
           >
             <span className="relative z-10">אני רוצה להירשם</span>
