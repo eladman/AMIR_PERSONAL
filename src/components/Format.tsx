@@ -7,8 +7,8 @@ import Image from "next/image";
 
 const CAROUSEL_IMAGES = [
   { src: "/images/MainScroll.jpeg", alt: "Globes 40x40 cover" },
-  { src: "/images/pic_3.jpeg", alt: "תנועה וטבע" },
-  { src: "/images/pic_4.jpeg", alt: "מפגש אנושי" },
+  { src: "/images/amir_small_group.jpeg", alt: "תנועה וטבע" },
+  { src: "/images/pic_5.jpeg", alt: "מפגש אנושי" },
   { src: "/images/pic_12.jpeg", alt: "אווירת הסדנה" },
 ];
 
@@ -182,7 +182,7 @@ export default function Format() {
         <div className="hidden lg:grid grid-cols-2 gap-4 lg:w-1/2">
           <div className="format-image relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl group">
             <Image
-              src="/images/pic_3.jpeg"
+              src="/images/amir_small_group.jpeg"
               alt="תנועה וטבע"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -190,7 +190,7 @@ export default function Format() {
           </div>
           <div className="format-image relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl group">
             <Image
-              src="/images/pic_4.jpeg"
+              src="/images/pic_5.jpeg"
               alt="מפגש אנושי"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
