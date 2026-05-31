@@ -109,20 +109,52 @@ export default function Closing() {
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 flex flex-col items-center">
-        <p className="closing-text text-secondary text-2xl md:text-4xl font-bold mb-6 leading-relaxed">
-          שום דבר לא ישתנה מחר בבוקר.
-        </p>
-        <p className="closing-text text-secondary/50 text-2xl md:text-4xl font-bold mb-4 leading-relaxed">
-          אבל אם תתחיל להתאמן —
-        </p>
-        <p className="closing-text text-primary text-3xl md:text-5xl lg:text-6xl font-black mb-12 leading-tight">
-          הכל יתחיל להשתנות בטווח הארוך.
-        </p>
 
-        <p className="closing-text text-secondary/50 text-lg md:text-xl font-medium mb-6 max-w-2xl">
-          אם אתה מוכן לקחת אחריות על החיים שלך ולא לחכות שמישהו יגדיר אותם
-          עבורך — זה המקום.
-        </p>
+        {/* Title */}
+        <h2 className="closing-text text-secondary font-black leading-tight mb-4 text-3xl md:text-5xl lg:text-6xl">
+          בסוף הסדנה לא תצאו
+          <br />
+          רק עם{" "}
+          <span className="relative inline-block">
+            השראה
+            {/* wavy orange underline */}
+            <svg
+              aria-hidden="true"
+              className="absolute -bottom-2 right-0 w-full"
+              viewBox="0 0 120 8"
+              preserveAspectRatio="none"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 6 C22 2, 42 6, 62 3 C82 0, 102 4, 118 2"
+                stroke="#FF8714"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </span>
+          .
+        </h2>
+
+        {/* Divider */}
+        <div className="closing-text w-12 h-0.5 bg-primary mb-10 mt-2" />
+
+        {/* Outcome list */}
+        <ul className="closing-text mb-12 space-y-4 text-right w-full max-w-xl">
+          {[
+            "שיטה לקבל החלטות",
+            "בהירות לגבי הכיוון שלכם",
+            "כלים פרקטיים שיעזרו לכם להוביל את החיים במקום להגיב אליהם",
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-4">
+              <span className="mt-1.5 flex-shrink-0 w-2 h-2 rounded-full bg-primary" />
+              <span className="text-secondary/80 text-lg md:text-xl font-medium leading-snug">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
 
         <div className="closing-text flex flex-wrap items-center justify-center gap-6 mb-10 md:mb-16 text-secondary/70">
           <span className="inline-flex items-center gap-2 text-lg font-bold">
