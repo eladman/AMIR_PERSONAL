@@ -33,14 +33,15 @@ export default function Ticker() {
     const track = trackRef.current;
     if (!track) return () => ctx.revert();
 
-    // Reset to left edge (overrides any RTL drift)
-    gsap.set(track, { x: 0 });
-
     // Animate by exactly one copy width; repeat: -1 resets seamlessly
     // because copy N and copy N+1 are identical.
     const oneCopyWidth = track.scrollWidth / 4;
+
+    // Start shifted left by one copy and animate toward 0 so the content
+    // flows left-to-right. The reset is invisible because the copies match.
+    gsap.set(track, { x: -oneCopyWidth });
     const tween = gsap.to(track, {
-      x: -oneCopyWidth,
+      x: 0,
       duration: 28,
       ease: "none",
       repeat: -1,
