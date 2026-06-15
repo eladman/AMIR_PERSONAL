@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -62,9 +63,30 @@ export default function About() {
             עמיר מנחם, יזם סדרתי שייסד את תנועת <span className="text-primary font-bold">חמש אצבעות</span>, תוכנית יואב ועוד מיזמים ופרויקטים רבים. עם למעלה מ-1,000 הרצאות בכל רחבי הארץ ובעל הפודקאסט ״חמש אצבעות״ עם אלפי האזנות
           </p>
 
-          <p className="about-element text-lg md:text-xl leading-relaxed text-secondary/70 mt-6">
-            בסדנה זו, עמיר ישתף בדרך שלו ובכלים הפרקטיים שמובילים אותו בחיים, ויעזור לכם למצוא את המצפן הפנימי שלכם כדי להתחיל לנוע קדימה.
-          </p>
+          {/* Secondary paragraph — collapsed behind a toggle to keep the first read short */}
+          <div
+            className="about-element overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.2,1)] w-full"
+            style={{
+              maxHeight: expanded ? "320px" : "0px",
+              opacity: expanded ? 1 : 0,
+            }}
+          >
+            <p className="text-lg md:text-xl leading-relaxed text-secondary/70 mt-6">
+              בסדנה זו, עמיר ישתף בדרך שלו ובכלים הפרקטיים שמובילים אותו בחיים, ויעזור לכם למצוא את המצפן הפנימי שלכם כדי להתחיל לנוע קדימה.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setExpanded(prev => !prev)}
+            className="about-element mt-6 inline-flex items-center gap-2 text-primary font-bold text-lg hover:gap-3 transition-all"
+            aria-expanded={expanded}
+          >
+            {expanded ? "סגירה" : "עוד על עמיר"}
+            <span className={`transition-transform duration-300 ${expanded ? "rotate-90" : ""}`}>
+              ←
+            </span>
+          </button>
         </div>
 
         {/* Image */}

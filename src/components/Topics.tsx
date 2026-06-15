@@ -1,48 +1,38 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const topics = [
   {
     id: 1,
     title: "החלטות",
+    essence: "לקבל החלטות גדולות בלי להיתקע.",
     description: "שיטה לקבל החלטות גדולות בלי להיתקע בהתלבטויות אינסופיות. כלים להבחין בין מה שאני באמת רוצה לבין רעשי רקע וציפיות של הסביבה. מודל פרקטי לקבלת החלטות בקריירה, זוגיות ולימודים.",
   },
   {
     id: 2,
-    title: 'דיוק עצמי - מעבר מ"מה אני" ל"מי אני"',
+    title: 'דיוק עצמי',
+    essence: 'מעבר מ"מה אני" ל"מי אני".',
     description: "תהליך לזיהוי הערכים והעקרונות שמובילים את החיים שלך. בניית חזון אישי לשנים הקרובות. הגדרת זהות אישית שתעזור לך לקבל החלטות בצורה ברורה יותר.",
   },
   {
     id: 3,
-    title: "יזמות, השפעה ואורח חיים פרואקטיבי",
+    title: "יזמות והשפעה",
+    essence: "להפוך רעיון לתנועה קדימה.",
     description: "איך לקחת רעיון ולהפוך אותו לתוכנית פעולה. כלים להובלת אנשים ויצירת השפעה גם בלי תפקיד ניהולי. בניית הרגלים של אנשים שמייצרים הזדמנויות במקום לחכות להן.",
   },
 ];
 
 export default function Topics() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleNext = () => {
-    if (activeIndex < topics.length - 1) {
-      setActiveIndex(prev => prev + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (activeIndex > 0) {
-      setActiveIndex(prev => prev - 1);
-    }
-  };
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Entrance animation for the whole section
     const ctx = gsap.context(() => {
       gsap.from(".topic-title-anim", {
         scrollTrigger: {
@@ -52,18 +42,19 @@ export default function Topics() {
         y: 40,
         opacity: 0,
         duration: 1,
-        stagger: 0.2,
+        stagger: 0.15,
         ease: "power3.out",
       });
 
-      gsap.from(".stack-container", {
+      gsap.from(".topic-card", {
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
+          trigger: ".topic-grid",
+          start: "top 80%",
         },
-        x: -50, // Slides in from right (RTL context)
+        y: 60,
         opacity: 0,
-        duration: 1,
+        duration: 0.9,
+        stagger: 0.14,
         ease: "power3.out",
       });
     }, containerRef);
@@ -71,120 +62,88 @@ export default function Topics() {
     return () => ctx.revert();
   }, []);
 
-
   return (
-    <section id="topics" ref={containerRef} className="py-24 md:py-32 px-6 bg-background relative overflow-hidden">
-      {/* Decorative background element */}
-      <div className="hidden md:block absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+    <section id="topics" ref={containerRef} className="py-24 md:py-32 px-6 bg-secondary relative overflow-hidden">
+      {/* Decorative glow */}
+      <div className="hidden md:block absolute top-0 left-0 w-[700px] h-[700px] bg-primary/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
+      <div className="hidden md:block absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl translate-y-1/3 translate-x-1/4 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 relative z-10 items-center">
+      <div className="max-w-7xl mx-auto relative z-10">
 
-        {/* Right Column - Title */}
-        <div className="lg:w-5/12 relative z-20">
-          <div>
-            <h2 className="topic-title-anim text-primary font-bold text-xl mb-4 uppercase tracking-widest flex items-center gap-4">
-              <span className="w-12 h-[2px] bg-primary rounded-full"></span>
-              על מה נעבוד?
-            </h2>
-            <h3 className="topic-title-anim text-4xl md:text-5xl lg:text-7xl font-black text-secondary leading-[1.1]">
-              הכלים שייקחו <br />
-              אותך <span className="text-primary relative inline-block">
-                לשלב הבא
-                <svg className="absolute -bottom-2 right-0 w-full h-3 text-primary/30" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="3" fill="none" />
-                </svg>
-              </span>
-            </h3>
-            <p className="topic-title-anim mt-8 text-xl text-secondary/70 leading-relaxed font-medium max-w-md">
-              הסדנה בנויה כהליך התפתחותי, שלב אחר שלב. לחצו על הכרטיסיות או השתמשו בחיצים כדי לגלות את השלבים שנעבור יחד.
-            </p>
-
-            {/* Navigation Controls */}
-            <div className="topic-title-anim flex items-center gap-2 md:gap-4 mt-10">
-              {/* In RTL, Right chevron is Previous, Left chevron is Next */}
-              <button
-                onClick={handlePrev}
-                disabled={activeIndex === 0}
-                className="w-12 h-12 rounded-full border-2 border-secondary/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-secondary disabled:cursor-not-allowed"
-                aria-label="הקודם"
-              >
-                <ChevronRight size={24} />
-              </button>
-
-              <div className="text-xl font-bold text-secondary font-mono w-16 text-center">
-                {activeIndex + 1} <span className="text-secondary/30 text-lg">/</span> {topics.length}
-              </div>
-
-              <button
-                onClick={handleNext}
-                disabled={activeIndex === topics.length - 1}
-                className="w-12 h-12 rounded-full border-2 border-secondary/10 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-secondary disabled:cursor-not-allowed"
-                aria-label="הבא"
-              >
-                <ChevronLeft size={24} />
-              </button>
-            </div>
-          </div>
+        {/* Heading */}
+        <div className="max-w-3xl mb-16 md:mb-20">
+          <h2 className="topic-title-anim text-primary font-bold text-xl mb-4 uppercase tracking-widest flex items-center gap-4">
+            <span className="w-12 h-[2px] bg-primary rounded-full"></span>
+            על מה נעבוד?
+          </h2>
+          <h3 className="topic-title-anim text-4xl md:text-5xl lg:text-7xl font-black text-white leading-[1.1]">
+            הכלים שייקחו אותך{" "}
+            <span className="text-primary relative inline-block">
+              לשלב הבא
+              <svg className="absolute -bottom-2 right-0 w-full h-3 text-primary/30" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="3" fill="none" />
+              </svg>
+            </span>
+          </h3>
+          <p className="topic-title-anim mt-8 text-xl text-white/50 leading-relaxed font-medium">
+            הסדנה בנויה כהליך התפתחותי, שלב אחר שלב. לפניכם שלושת השלבים שנעבור יחד.
+          </p>
         </div>
 
-        {/* Left Column - Card Stack */}
-        <div className="lg:w-7/12 relative stack-container h-[420px] md:h-[480px] lg:h-[520px] w-full mt-10 lg:mt-0">
-          <div className="relative w-full h-full max-w-lg mx-auto lg:mr-auto lg:ml-0">
-            {topics.map((topic, index) => {
-              const offset = index - activeIndex;
-              const isActive = offset === 0;
-              const isPast = offset < 0;
+        {/* 3-column card grid */}
+        <div className="topic-grid grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+          {topics.map((topic, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div
+                key={topic.id}
+                className="topic-card flex flex-col border border-white/10 rounded-2xl p-7 lg:p-9 bg-white/[0.04] hover:bg-white/[0.07] hover:border-white/20 transition-colors duration-300"
+              >
+                {/* Visible step number */}
+                <span className="text-primary font-black text-5xl md:text-6xl leading-none mb-6 select-none">
+                  0{index + 1}
+                </span>
 
-              return (
-                <div
-                  key={topic.id}
-                  onClick={() => {
-                    if (offset > 0) {
-                      setActiveIndex(index);
-                    }
-                  }}
-                  className={`absolute inset-0 bg-secondary rounded-[2.5rem] p-6 md:p-8 lg:p-12 shadow-2xl transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.25,1,0.2,1)] flex flex-col justify-center overflow-hidden
-                    ${offset > 0 ? 'cursor-pointer hover:bg-[#000042]' : ''}
-                  `}
-                  style={{
-                    zIndex: isPast ? 40 + offset : 30 - offset,
-                    transform: isPast
-                      ? 'translateY(-100px) scale(0.95)'
-                      : `translateY(${offset * 28}px) scale(${1 - offset * 0.06})`,
-                    opacity: isPast ? 0 : Math.max(1 - offset * 0.3, 0),
-                    pointerEvents: isActive || offset > 0 ? 'auto' : 'none',
-                    visibility: isPast && offset < -1 ? 'hidden' : 'visible'
-                  }}
+                {/* Thin accent line */}
+                <div className="w-10 h-[2px] bg-primary/50 rounded-full mb-6" />
+
+                {/* Title */}
+                <h4 className="text-2xl md:text-3xl lg:text-[2rem] font-black text-white leading-tight mb-3">
+                  {topic.title}
+                </h4>
+
+                {/* Essence — always visible */}
+                <p className="text-base md:text-lg text-primary font-bold leading-relaxed flex-1">
+                  {topic.essence}
+                </p>
+
+                {/* Expand button */}
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className="flex items-center gap-2 mt-7 text-white/30 text-sm font-medium hover:text-primary transition-colors duration-200 cursor-pointer w-fit"
+                  aria-expanded={isOpen}
                 >
-                  {/* Faint Background Number */}
-                  <div className="absolute -top-8 left-4 text-[120px] md:text-[160px] lg:text-[220px] font-black text-white/5 leading-none select-none pointer-events-none transition-transform duration-700"
-                    style={{ transform: isActive ? 'scale(1)' : 'scale(0.9)' }}>
-                    0{index + 1}
-                  </div>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                  />
+                  {isOpen ? "סגירה" : "לחץ להרחבה"}
+                </button>
 
-                  <div className="relative z-10 transform transition-transform duration-700"
-                    style={{ transform: isActive ? 'translateY(0)' : 'translateY(20px)' }}>
-                    <div className="mb-4 md:mb-6 w-10 h-[3px] bg-primary rounded-full" />
-
-                    <h4 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white leading-tight">
-                      {topic.title}
-                    </h4>
-
-                    <p className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed font-medium">
-                      {topic.description}
-                    </p>
-                  </div>
-
-                  {/* Click to reveal indicator for upcoming cards */}
-                  {offset > 0 && offset < 3 && (
-                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 opacity-0 hover:opacity-100 transition-opacity text-white/40 text-sm font-medium tracking-wide">
-                      לחץ להצגה
-                    </div>
-                  )}
+                {/* Collapsible description */}
+                <div
+                  style={{
+                    maxHeight: isOpen ? "300px" : "0px",
+                    opacity: isOpen ? 1 : 0,
+                  }}
+                  className="overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.2,1)]"
+                >
+                  <p className="text-sm lg:text-base text-white/50 leading-relaxed font-medium mt-5 border-t border-white/10 pt-5">
+                    {topic.description}
+                  </p>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
 
       </div>

@@ -1,8 +1,10 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Ticker from "@/components/Ticker";
+import MethodSection from "@/components/MethodSection";
 import About from "@/components/About";
 import Topics from "@/components/Topics";
+import Timeline from "@/components/Timeline";
 import Format from "@/components/Format";
 import Audience from "@/components/Audience";
 import Closing from "@/components/Closing";
@@ -14,9 +16,11 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Ticker />
+      <MethodSection />
       <Audience />
       <Topics />
       <About />
+      {/* <Timeline /> */}
       <Format />
       <Closing />
       <Footer />

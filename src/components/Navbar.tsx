@@ -69,8 +69,9 @@ export default function Navbar() {
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8 font-medium text-sm">
             {[
-              { href: "#about", label: "על עמיר" },
+              { href: "#method", label: "המתודה" },
               { href: "#topics", label: "הסדנה" },
+              { href: "#about", label: "על עמיר" },
               { href: "#format", label: "המפגש" },
             ].map((link) => (
               <Link
@@ -124,8 +125,11 @@ export default function Navbar() {
       {menuOpen && (
         <div className="fixed inset-0 z-40 bg-white flex flex-col items-center justify-center gap-8">
           {[
-            { href: "#about", label: "על עמיר" },
+            { href: "#method", label: "המתודה" },
+            { href: "#audience", label: "למי זה מיועד" },
             { href: "#topics", label: "הסדנה" },
+            { href: "#about", label: "על עמיר" },
+            { href: "#timeline", label: "לוח היום" },
             { href: "#format", label: "המפגש" },
             { href: "https://zygo.co.il/event/710553243573321580/ZF10o46f2", label: "הצטרף עכשיו" },
           ].map((link) => (

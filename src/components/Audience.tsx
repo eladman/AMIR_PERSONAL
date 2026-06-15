@@ -86,6 +86,9 @@ export default function Audience() {
             האם המקום הזה{" "}
             <span className="text-primary">עבורך?</span>
           </h3>
+          <p className="mt-6 text-lg md:text-2xl text-secondary/60 font-medium max-w-2xl leading-relaxed">
+            הסדנה נפתחת לקבוצה מצומצמת ומדויקת — לא לכולם, אלא למי שבאמת מוכן לזוז.
+          </p>
         </div>
 
         {/* Line-style items */}
@@ -109,6 +112,14 @@ export default function Audience() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Curation note — ties to the short questionnaire in the registration flow */}
+        <div className="audience-header mt-12 md:mt-16 flex items-center gap-4">
+          <span className="hidden md:block w-12 h-[2px] bg-primary/40 shrink-0" />
+          <p className="text-base md:text-xl text-secondary/70 font-medium leading-relaxed">
+            ההרשמה כוללת שאלון קצר — אנחנו בוחרים את הקבוצה בקפידה.
+          </p>
         </div>
       </div>
     </section>
