@@ -4,7 +4,6 @@ import Ticker from "@/components/Ticker";
 import MethodSection from "@/components/MethodSection";
 import About from "@/components/About";
 import Topics from "@/components/Topics";
-import Timeline from "@/components/Timeline";
 import Format from "@/components/Format";
 import Audience from "@/components/Audience";
 import Closing from "@/components/Closing";
