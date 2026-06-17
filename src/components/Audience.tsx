@@ -114,13 +114,6 @@ export default function Audience() {
           ))}
         </div>
 
-        {/* Curation note — ties to the short questionnaire in the registration flow */}
-        <div className="audience-header mt-12 md:mt-16 flex items-center gap-4">
-          <span className="hidden md:block w-12 h-[2px] bg-primary/40 shrink-0" />
-          <p className="text-base md:text-xl text-secondary/70 font-medium leading-relaxed">
-            ההרשמה כוללת שאלון קצר — אנחנו בוחרים את הקבוצה בקפידה.
-          </p>
-        </div>
       </div>
     </section>
   );
