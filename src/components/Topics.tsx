@@ -100,7 +100,7 @@ export default function Topics() {
             return (
               <div
                 key={topic.id}
-                className="topic-card flex flex-col border border-white/10 rounded-2xl p-7 lg:p-9 bg-white/[0.04] hover:bg-white/[0.07] hover:border-white/20 transition-colors duration-300"
+                className="topic-card flex flex-col border border-white/10 rounded-card p-7 lg:p-9 bg-white/[0.04] hover:bg-white/[0.07] hover:border-white/20 transition-colors duration-300"
               >
                 {/* Visible step number */}
                 <span className="text-primary font-black text-5xl md:text-6xl leading-none mb-6 select-none">

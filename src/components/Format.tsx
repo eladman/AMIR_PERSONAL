@@ -137,7 +137,7 @@ export default function Format() {
         {/* Mobile Carousel — hidden on desktop */}
         <div className="format-carousel w-full lg:hidden relative">
           <div
-            className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl"
+            className="relative aspect-[3/4] rounded-image overflow-hidden shadow-xl"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -176,7 +176,7 @@ export default function Format() {
 
         {/* Desktop Grid — hidden on mobile */}
         <div className="hidden lg:grid grid-cols-2 gap-4 lg:w-1/2">
-          <div className="format-image relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl group">
+          <div className="format-image relative aspect-[3/4] rounded-image overflow-hidden shadow-xl group">
             <Image
               src="/images/amir_small_group.jpeg"
               alt="תנועה וטבע"
@@ -184,7 +184,7 @@ export default function Format() {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
-          <div className="format-image relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl group">
+          <div className="format-image relative aspect-[3/4] rounded-image overflow-hidden shadow-xl group">
             <Image
               src="/images/pic_5.jpeg"
               alt="מפגש אנושי"
