@@ -94,7 +94,7 @@ export default function About() {
         </div>
 
         {/* Image */}
-        <div className="about-image order-2 w-3/4 md:w-1/2 bg-gray-200 rounded-[3rem] p-3">
+        <div className="about-image order-2 w-3/4 md:w-1/2 bg-secondary/10 rounded-[3rem] p-3">
           <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl">
             <Image
               src="/images/pic_2.jpeg"

@@ -41,7 +41,7 @@ export default function Footer() {
         <div className="footer-el flex flex-col items-center md:items-end gap-2">
           <div className="flex items-center gap-2 bg-secondary/5 px-4 py-2 rounded-full border border-secondary/10">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-xs font-mono tracking-widest text-secondary/80">הרשמה פתוחה</span>
+            <span className="text-xs font-medium tracking-widest text-secondary/80">הרשמה פתוחה</span>
           </div>
           <p className="text-secondary/40 text-xs mt-4 md:mt-2">
             © {new Date().getFullYear()} כל הזכויות שמורות.

@@ -63,7 +63,7 @@ export default function Testimonials() {
     <section
       id="testimonials"
       ref={containerRef}
-      className="relative overflow-hidden bg-secondary text-white py-28 md:py-40 px-6"
+      className="relative overflow-hidden bg-secondary text-white py-24 md:py-32 px-6"
     >
       {/* Single soft, off-center accent — restrained, not symmetric */}
       <div className="pointer-events-none absolute -top-32 right-[-10%] h-[520px] w-[520px] rounded-full bg-primary/[0.07] blur-[120px]" />
