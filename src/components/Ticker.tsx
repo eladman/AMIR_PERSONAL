@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 const items = [
   "איך מייצרים חיים פרו-אקטיביים", "✦",
@@ -24,6 +25,8 @@ export default function Ticker() {
 
     // Scroll entrance
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(sectionRef.current, {
         scrollTrigger: { trigger: sectionRef.current, start: "top 90%" },
         opacity: 0, y: 20, duration: 0.8, ease: "power2.out",
@@ -32,6 +35,9 @@ export default function Ticker() {
 
     const track = trackRef.current;
     if (!track) return () => ctx.revert();
+
+    // Reduced motion: leave the ticker static (skip the infinite marquee).
+    if (prefersReducedMotion()) return () => ctx.revert();
 
     // Animate by exactly one copy width; repeat: -1 resets seamlessly
     // because copy N and copy N+1 are identical.

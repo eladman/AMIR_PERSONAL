@@ -5,7 +5,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #FF8714;
   --primary-rgb: 255, 135, 20;
+  --secondary: #171717;
+  --secondary-rgb: 23, 23, 23;
 }
 
 @layer base {
@@ -26,11 +29,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #171717;
+  background: var(--secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FF8714;
+  background: var(--primary);
   border-radius: 3px;
 }
 
@@ -51,7 +54,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: #FF8714;
+  background: var(--primary);
   transform-origin: left;
   transform: scaleX(0);
   z-index: 9999;
@@ -59,7 +62,7 @@
 
 /* Section dark helper */
 .section-dark {
-  background-color: #171717;
+  background-color: var(--secondary);
   color: #ffffff;
 }
 
@@ -78,11 +81,30 @@
 .hero-subtitle,
 .hero-tagline,
 .hero-manifesto,
+.hero-badges,
 .hero-cta,
 .hero-scroll-indicator,
 .hero-line-1,
 .hero-line-2 {
   visibility: hidden;
+}
+
+/* Cinematic Ken Burns — slow zoom on the active background slide */
+.hero-kenburns {
+  animation: hero-kenburns 8s ease-out forwards;
+}
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.14);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-kenburns {
+    animation: none;
+  }
 }
 
 .nav-init {
@@ -105,14 +127,36 @@
 
 /* Background textures */
 .bg-dot-grid {
-  background-image: radial-gradient(circle, rgba(23,23,23,0.06) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(var(--secondary-rgb),0.06) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 .bg-crosshatch {
   background-image:
-    linear-gradient(rgba(23,23,23,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23,23,23,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(var(--secondary-rgb),0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--secondary-rgb),0.04) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+/* Testimonial editorial rotator */
+@keyframes testimonial-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.testimonial-enter { animation: testimonial-enter 600ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@keyframes testimonial-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.testimonial-progress {
+  transform-origin: right center; /* RTL fill */
+  animation: testimonial-progress var(--testimonial-duration, 6500ms) linear forwards;
+}
+.testimonial-progress[data-paused="true"] { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-enter { animation: none; }
+  .testimonial-progress { animation: none; transform: scaleX(1); }
 }
 
 /* Ambient orb */
@@ -124,7 +168,7 @@
 /* Rotating geometric ring */
 .geo-ring {
   position: absolute; border-radius: 9999px; pointer-events: none;
-  border: 1.5px solid rgba(255,135,20,0.12);
+  border: 1.5px solid rgba(var(--primary-rgb),0.12);
   animation: slow-spin 40s linear infinite; will-change: transform;
 }
 
@@ -132,7 +176,7 @@
 .stat-card-shimmer { position: relative; overflow: hidden; }
 .stat-card-shimmer::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(105deg, transparent 40%, rgba(255,135,20,0.12) 50%, transparent 60%);
+  background: linear-gradient(105deg, transparent 40%, rgba(var(--primary-rgb),0.12) 50%, transparent 60%);
   transform: translateX(100%);
   animation: shimmer 2.2s ease-in-out infinite;
 }

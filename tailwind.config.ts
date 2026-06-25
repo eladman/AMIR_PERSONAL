@@ -17,6 +17,13 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-heebo)", "sans-serif"],
       },
+      borderRadius: {
+        // Named radius scale. Values match the prior ad-hoc usages, so this is
+        // a naming pass with no visual change. The About image keeps explicit
+        // 3rem/2.5rem values (intentional nested frame: inner = outer - gap).
+        card: "1rem",
+        image: "2rem",
+      },
       keyframes: {
         "scroll-line": {
           "0%": { transform: "scaleY(0)", transformOrigin: "top" },

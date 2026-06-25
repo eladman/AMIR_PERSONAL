@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import SectionLabel from "@/components/SectionLabel";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,6 +15,8 @@ export default function About() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(".about-element", {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -50,14 +54,14 @@ export default function About() {
 
         {/* Content */}
         <div className="w-full md:w-1/2 flex flex-col items-start text-secondary order-1">
-          <h2 className="about-element text-primary font-bold text-xl mb-4 uppercase tracking-widest">
+          <SectionLabel withLine className="about-element mb-4">
             מי זה עמיר?
-          </h2>
+          </SectionLabel>
 
-          <h3 className="about-element text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight">
+          <h2 className="about-element text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight">
             יזם סדרתי, <br />
             <span className="text-secondary/70">איש של עשייה.</span>
-          </h3>
+          </h2>
 
           <p className="about-element text-xl md:text-2xl leading-relaxed text-secondary/80 font-medium">
             עמיר מנחם, יזם סדרתי שייסד את תנועת <span className="text-primary font-bold">חמש אצבעות</span>, תוכנית יואב ועוד מיזמים ופרויקטים רבים. עם למעלה מ-1,000 הרצאות בכל רחבי הארץ ובעל הפודקאסט ״חמש אצבעות״ עם אלפי האזנות
@@ -90,7 +94,7 @@ export default function About() {
         </div>
 
         {/* Image */}
-        <div className="about-image order-2 w-3/4 md:w-1/2 bg-gray-200 rounded-[3rem] p-3">
+        <div className="about-image order-2 w-3/4 md:w-1/2 bg-secondary/10 rounded-[3rem] p-3">
           <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl">
             <Image
               src="/images/pic_2.jpeg"

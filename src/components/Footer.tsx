@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 export default function Footer() {
   const containerRef = useRef<HTMLElement>(null);
@@ -10,6 +11,8 @@ export default function Footer() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(".footer-el", {
         scrollTrigger: { trigger: containerRef.current, start: "top 95%" },
         y: 20, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power2.out",
@@ -25,7 +28,8 @@ export default function Footer() {
         <div className="footer-el flex flex-col items-center md:items-start gap-2">
           <h4 className="font-black text-2xl tracking-tight">עמיר מנחם</h4>
           <p className="text-secondary/60 text-sm font-medium">מאפס לאחד - סדנה אישית</p>
-          <p className="text-secondary/50 text-xs font-medium">19.06.2026 · הפגודה, שדות ים</p>
+          <p className="text-secondary/50 text-xs font-medium">21.08.2026 · טל והדר, עמק חפר</p>
+          <p className="text-secondary/50 text-xs font-medium">02.10.2026 · הפגודה, שדות ים</p>
         </div>
 
         <div className="footer-el flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-6 text-secondary/60 text-sm font-medium">
@@ -37,7 +41,7 @@ export default function Footer() {
         <div className="footer-el flex flex-col items-center md:items-end gap-2">
           <div className="flex items-center gap-2 bg-secondary/5 px-4 py-2 rounded-full border border-secondary/10">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-xs font-mono tracking-widest text-secondary/80">הרשמה פתוחה</span>
+            <span className="text-xs font-medium tracking-widest text-secondary/80">הרשמה פתוחה</span>
           </div>
           <p className="text-secondary/40 text-xs mt-4 md:mt-2">
             © {new Date().getFullYear()} כל הזכויות שמורות.

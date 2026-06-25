@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from "next/link";
+import CTAButton from "@/components/CTAButton";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 export default function Closing() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,6 +14,8 @@ export default function Closing() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       // Text timeline reveal
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -47,7 +50,7 @@ export default function Closing() {
     const btn = btnRef.current;
     if (!btn) return () => ctx.revert();
 
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 768 && !prefersReducedMotion()) {
       const handleMove = (e: MouseEvent) => {
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
@@ -120,7 +123,7 @@ export default function Closing() {
             {/* wavy orange underline */}
             <svg
               aria-hidden="true"
-              className="absolute -bottom-2 right-0 w-full"
+              className="absolute -bottom-2 right-0 w-full text-primary"
               viewBox="0 0 120 8"
               preserveAspectRatio="none"
               fill="none"
@@ -128,7 +131,7 @@ export default function Closing() {
             >
               <path
                 d="M2 6 C22 2, 42 6, 62 3 C82 0, 102 4, 118 2"
-                stroke="#FF8714"
+                stroke="currentColor"
                 strokeWidth="2.5"
                 strokeLinecap="round"
               />
@@ -156,27 +159,23 @@ export default function Closing() {
           ))}
         </ul>
 
-        <div className="closing-text flex flex-wrap items-center justify-center gap-6 mb-10 md:mb-16 text-secondary/70">
+        <div className="closing-text flex flex-col sm:flex-row flex-wrap items-center justify-center gap-x-6 gap-y-3 mb-10 md:mb-16 text-secondary/70">
           <span className="inline-flex items-center gap-2 text-lg font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></svg>
-            19.06.2026
+            21.08.2026 · טל והדר, עמק חפר
           </span>
-          <span className="w-1 h-1 rounded-full bg-secondary/30" />
+          <span className="hidden sm:block w-1 h-1 rounded-full bg-secondary/30" />
           <span className="inline-flex items-center gap-2 text-lg font-bold">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-            הפגודה, שדות ים
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></svg>
+            02.10.2026 · הפגודה, שדות ים
           </span>
         </div>
 
-        <Link
+        <CTAButton
           ref={btnRef}
-          href="https://zygo.co.il/event/710553243573321580/ZF10o46f2"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="closing-cta group relative inline-flex overflow-hidden bg-primary text-secondary px-8 py-4 md:px-12 md:py-6 rounded-full text-xl md:text-2xl font-black shadow-2xl shadow-primary/30 transition-shadow hover:shadow-primary/50"
-        >
-          <span className="relative z-10 flex items-center gap-3 text-[rgba(255,255,240,1)]">
-            אני רוצה להירשם
+          size="lg"
+          className="closing-cta shadow-2xl shadow-primary/30 hover:shadow-primary/50"
+          icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -192,9 +191,10 @@ export default function Closing() {
               <path d="m5 12 7-7 7 7" />
               <path d="M12 19V5" />
             </svg>
-          </span>
-          <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-        </Link>
+          }
+        >
+          אני רוצה להירשם
+        </CTAButton>
       </div>
     </section>
   );

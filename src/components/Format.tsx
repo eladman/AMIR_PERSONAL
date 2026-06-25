@@ -4,6 +4,8 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import SectionLabel from "@/components/SectionLabel";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 const CAROUSEL_IMAGES = [
   { src: "/images/MainScroll.jpeg", alt: "Globes 40x40 cover" },
@@ -39,6 +41,8 @@ export default function Format() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(".format-text", {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -99,13 +103,13 @@ export default function Format() {
 
         {/* Content */}
         <div className="w-full lg:w-1/2 flex flex-col items-start">
-          <h2 className="format-text text-primary font-bold text-xl mb-4 uppercase tracking-widest">
+          <SectionLabel withLine className="format-text mb-4">
             איך זה יראה?
-          </h2>
-          <h3 className="format-text text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight">
+          </SectionLabel>
+          <h2 className="format-text text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight">
             תוכן. טבע. תנועה.השראה. <br />
             <span className="text-secondary/60">מפגש אנושי נטול אינטרס</span>
-          </h3>
+          </h2>
           {/* Date, Time & Location details */}
           <div className="format-text mt-10 flex flex-col gap-4">
             <div className="flex items-center gap-4">
@@ -113,8 +117,9 @@ export default function Format() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></svg>
               </div>
               <div>
-                <p className="text-sm text-secondary/50 font-medium">מתי?</p>
-                <p className="text-xl font-bold">19.06.2026 | יום שישי</p>
+                <p className="text-sm text-secondary/50 font-medium">מתי ואיפה?</p>
+                <p className="text-xl font-bold">21.08.2026 · טל והדר, עמק חפר</p>
+                <p className="text-xl font-bold">02.10.2026 · הפגודה, שדות ים</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -126,22 +131,13 @@ export default function Format() {
                 <p className="text-xl font-bold">09:00 – 14:30</p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-              </div>
-              <div>
-                <p className="text-sm text-secondary/50 font-medium">איפה?</p>
-                <p className="text-xl font-bold">הפגודה, שדות ים</p>
-              </div>
-            </div>
           </div>
         </div>
 
         {/* Mobile Carousel — hidden on desktop */}
         <div className="format-carousel w-full lg:hidden relative">
           <div
-            className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl"
+            className="relative aspect-[3/4] rounded-image overflow-hidden shadow-xl"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -180,7 +176,7 @@ export default function Format() {
 
         {/* Desktop Grid — hidden on mobile */}
         <div className="hidden lg:grid grid-cols-2 gap-4 lg:w-1/2">
-          <div className="format-image relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl group">
+          <div className="format-image relative aspect-[3/4] rounded-image overflow-hidden shadow-xl group">
             <Image
               src="/images/amir_small_group.jpeg"
               alt="תנועה וטבע"
@@ -188,7 +184,7 @@ export default function Format() {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
-          <div className="format-image relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl group">
+          <div className="format-image relative aspect-[3/4] rounded-image overflow-hidden shadow-xl group">
             <Image
               src="/images/pic_5.jpeg"
               alt="מפגש אנושי"

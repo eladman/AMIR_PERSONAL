@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionLabel from "@/components/SectionLabel";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 const topics = [
   {
@@ -34,6 +36,8 @@ export default function Topics() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(".topic-title-anim", {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -72,11 +76,10 @@ export default function Topics() {
 
         {/* Heading */}
         <div className="max-w-3xl mb-16 md:mb-20">
-          <h2 className="topic-title-anim text-primary font-bold text-xl mb-4 uppercase tracking-widest flex items-center gap-4">
-            <span className="w-12 h-[2px] bg-primary rounded-full"></span>
+          <SectionLabel withLine className="topic-title-anim mb-4">
             על מה נעבוד?
-          </h2>
-          <h3 className="topic-title-anim text-4xl md:text-5xl lg:text-7xl font-black text-white leading-[1.1]">
+          </SectionLabel>
+          <h2 className="topic-title-anim text-4xl md:text-5xl lg:text-7xl font-black text-white leading-[1.1]">
             הכלים שייקחו אותך{" "}
             <span className="text-primary relative inline-block">
               לשלב הבא
@@ -84,7 +87,7 @@ export default function Topics() {
                 <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="3" fill="none" />
               </svg>
             </span>
-          </h3>
+          </h2>
           <p className="topic-title-anim mt-8 text-xl text-white/50 leading-relaxed font-medium">
             הסדנה בנויה כהליך התפתחותי, שלב אחר שלב. לפניכם שלושת השלבים שנעבור יחד.
           </p>
@@ -97,7 +100,7 @@ export default function Topics() {
             return (
               <div
                 key={topic.id}
-                className="topic-card flex flex-col border border-white/10 rounded-2xl p-7 lg:p-9 bg-white/[0.04] hover:bg-white/[0.07] hover:border-white/20 transition-colors duration-300"
+                className="topic-card flex flex-col border border-white/10 rounded-card p-7 lg:p-9 bg-white/[0.04] hover:bg-white/[0.07] hover:border-white/20 transition-colors duration-300"
               >
                 {/* Visible step number */}
                 <span className="text-primary font-black text-5xl md:text-6xl leading-none mb-6 select-none">
@@ -108,9 +111,9 @@ export default function Topics() {
                 <div className="w-10 h-[2px] bg-primary/50 rounded-full mb-6" />
 
                 {/* Title */}
-                <h4 className="text-2xl md:text-3xl lg:text-[2rem] font-black text-white leading-tight mb-3">
+                <h3 className="text-2xl md:text-3xl lg:text-[2rem] font-black text-white leading-tight mb-3">
                   {topic.title}
-                </h4>
+                </h3>
 
                 {/* Essence — always visible */}
                 <p className="text-base md:text-lg text-primary font-bold leading-relaxed flex-1">
