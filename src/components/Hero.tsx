@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import Link from "next/link";
+import CTAButton from "@/components/CTAButton";
 
 // Cinematic background carousel — workshop atmosphere images crossfade behind the title.
 const SLIDES = [
@@ -201,15 +201,12 @@ export default function Hero() {
           </div>
 
           {/* CTA */}
-          <Link
-            href="https://zygo.co.il/event/710553243573321580/ZF10o46f2"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hero-cta group relative inline-flex overflow-hidden bg-primary text-white px-10 py-4 rounded-full text-lg md:text-xl font-bold transition-transform hover:scale-[1.03] active:scale-95 shadow-[0_8px_40px_rgba(255,135,20,0.4)]"
+          <CTAButton
+            size="md"
+            className="hero-cta shadow-[0_8px_40px_rgba(255,135,20,0.4)]"
           >
-            <span className="relative z-10">אני רוצה להירשם</span>
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </Link>
+            אני רוצה להירשם
+          </CTAButton>
         </div>
       </div>
 

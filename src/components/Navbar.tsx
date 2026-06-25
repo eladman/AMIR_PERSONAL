@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import CTAButton from "@/components/CTAButton";
 
 export default function Navbar() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -93,15 +94,9 @@ export default function Navbar() {
           </div>
 
           {/* CTA */}
-          <Link
-            href="https://zygo.co.il/event/710553243573321580/ZF10o46f2"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:inline-flex group relative overflow-hidden bg-primary text-white px-5 py-1.5 rounded-full text-sm font-bold transition-transform hover:scale-[1.03] active:scale-95"
-          >
-            <span className="relative z-10">להרשמה</span>
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </Link>
+          <div className="hidden md:block">
+            <CTAButton size="sm">להרשמה</CTAButton>
+          </div>
 
           {/* Mobile hamburger */}
           <button

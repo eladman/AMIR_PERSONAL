@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from "next/link";
+import CTAButton from "@/components/CTAButton";
 
 export default function Closing() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -168,15 +168,11 @@ export default function Closing() {
           </span>
         </div>
 
-        <Link
+        <CTAButton
           ref={btnRef}
-          href="https://zygo.co.il/event/710553243573321580/ZF10o46f2"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="closing-cta group relative inline-flex overflow-hidden bg-primary text-secondary px-8 py-4 md:px-12 md:py-6 rounded-full text-xl md:text-2xl font-black shadow-2xl shadow-primary/30 transition-shadow hover:shadow-primary/50"
-        >
-          <span className="relative z-10 flex items-center gap-3 text-[rgba(255,255,240,1)]">
-            אני רוצה להירשם
+          size="lg"
+          className="closing-cta shadow-2xl shadow-primary/30 hover:shadow-primary/50"
+          icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -192,9 +188,10 @@ export default function Closing() {
               <path d="m5 12 7-7 7 7" />
               <path d="M12 19V5" />
             </svg>
-          </span>
-          <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-        </Link>
+          }
+        >
+          אני רוצה להירשם
+        </CTAButton>
       </div>
     </section>
   );
