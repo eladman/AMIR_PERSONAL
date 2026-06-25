@@ -36,8 +36,8 @@ No test framework is configured.
   `--font-heebo` variable and the Tailwind `sans` family.
 - **Direction:** RTL (`dir="rtl"`, `lang="he"`)
 - **Layout:** Mobile-first, alternating white and dark sections
-- **CTA buttons:** Orange background with dark text (`text-secondary`) for WCAG-AA
-  contrast — see the shared `CTAButton` component. Avoid light-on-orange (fails AA).
+- **CTA buttons:** Orange background with white text (`text-white`) — see the
+  shared `CTAButton` component. Note: white-on-orange is ~2.4:1, below WCAG-AA.
 - **Section eyebrows:** Use the shared `SectionLabel` component, not bespoke styles.
 
 ## Key Conventions

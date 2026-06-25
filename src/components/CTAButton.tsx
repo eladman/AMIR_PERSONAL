@@ -25,8 +25,8 @@ const sizeClasses: Record<NonNullable<CTAButtonProps["size"]>, string> = {
   lg: "px-8 py-4 md:px-12 md:py-6 text-xl md:text-2xl",
 };
 
-// One register button: same shape, weight, hover overlay, and — crucially —
-// dark text on orange for WCAG-AA contrast (~7.4:1 vs ~2.4:1 for white/cream).
+// One register button: same shape, weight, hover overlay, and white text on
+// orange. Note: white-on-orange is ~2.4:1, below WCAG-AA (4.5:1).
 const CTAButton = forwardRef<HTMLAnchorElement, CTAButtonProps>(
   function CTAButton(
     { children, size = "md", href = REGISTRATION_URL, className = "", icon },
@@ -38,7 +38,7 @@ const CTAButton = forwardRef<HTMLAnchorElement, CTAButtonProps>(
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`group relative inline-flex items-center overflow-hidden rounded-full bg-primary font-bold text-secondary transition-[transform,box-shadow] duration-300 hover:scale-[1.03] active:scale-95 ${sizeClasses[size]} ${className}`}
+        className={`group relative inline-flex items-center overflow-hidden rounded-full bg-primary font-bold text-white transition-[transform,box-shadow] duration-300 hover:scale-[1.03] active:scale-95 ${sizeClasses[size]} ${className}`}
       >
         <span className="relative z-10 flex items-center gap-3">
           {children}
