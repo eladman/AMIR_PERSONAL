@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionLabel from "@/components/SectionLabel";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 const AUTOPLAY_MS = 6500;
 
@@ -42,6 +43,8 @@ export default function Testimonials() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(".testimonials-reveal", {
         scrollTrigger: { trigger: containerRef.current, start: "top 78%" },
         y: 50,

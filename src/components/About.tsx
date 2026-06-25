@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import SectionLabel from "@/components/SectionLabel";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,6 +15,8 @@ export default function About() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(".about-element", {
         scrollTrigger: {
           trigger: containerRef.current,

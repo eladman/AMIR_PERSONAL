@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionLabel from "@/components/SectionLabel";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 const topics = [
   {
@@ -35,6 +36,8 @@ export default function Topics() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(".topic-title-anim", {
         scrollTrigger: {
           trigger: containerRef.current,

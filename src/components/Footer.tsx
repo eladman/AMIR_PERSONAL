@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 export default function Footer() {
   const containerRef = useRef<HTMLElement>(null);
@@ -10,6 +11,8 @@ export default function Footer() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(".footer-el", {
         scrollTrigger: { trigger: containerRef.current, start: "top 95%" },
         y: 20, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power2.out",

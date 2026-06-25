@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import SectionLabel from "@/components/SectionLabel";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 const CAROUSEL_IMAGES = [
   { src: "/images/MainScroll.jpeg", alt: "Globes 40x40 cover" },
@@ -40,6 +41,8 @@ export default function Format() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(".format-text", {
         scrollTrigger: {
           trigger: containerRef.current,

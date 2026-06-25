@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import CTAButton from "@/components/CTAButton";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 export default function Navbar() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,14 +20,17 @@ export default function Navbar() {
     const ctx = gsap.context(() => {
       gsap.set(containerRef.current, { visibility: "visible" });
 
-      // Entrance: slide down after hero loads
-      gsap.from(containerRef.current, {
-        y: -100,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-        delay: 1.5,
-      });
+      // Entrance: slide down after hero loads (skipped for reduced motion —
+      // the scroll color-morph below is a state toggle, not motion, so it stays).
+      if (!prefersReducedMotion()) {
+        gsap.from(containerRef.current, {
+          y: -100,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          delay: 1.5,
+        });
+      }
 
       // Scroll morph — flip to the light style once past the hero edge
       ScrollTrigger.create({
@@ -43,11 +47,13 @@ export default function Navbar() {
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
-      gsap.fromTo(
-        ".mobile-link",
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: "power3.out", delay: 0.2 }
-      );
+      if (!prefersReducedMotion()) {
+        gsap.fromTo(
+          ".mobile-link",
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: "power3.out", delay: 0.2 }
+        );
+      }
     } else {
       document.body.style.overflow = "";
     }

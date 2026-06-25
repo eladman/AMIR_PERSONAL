@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionLabel from "@/components/SectionLabel";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 const pillars = ["קבלת החלטות", "דיוק", "תנועה קדימה"];
 
@@ -14,6 +15,8 @@ export default function MethodSection() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       gsap.from(".method-anim", {
         scrollTrigger: {
           trigger: containerRef.current,

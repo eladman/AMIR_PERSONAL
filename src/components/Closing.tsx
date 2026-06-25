@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CTAButton from "@/components/CTAButton";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 export default function Closing() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,6 +14,8 @@ export default function Closing() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       // Text timeline reveal
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -47,7 +50,7 @@ export default function Closing() {
     const btn = btnRef.current;
     if (!btn) return () => ctx.revert();
 
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 768 && !prefersReducedMotion()) {
       const handleMove = (e: MouseEvent) => {
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;

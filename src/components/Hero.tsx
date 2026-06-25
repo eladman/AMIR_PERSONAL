@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import CTAButton from "@/components/CTAButton";
 import SectionLabel from "@/components/SectionLabel";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 // Cinematic background carousel — workshop atmosphere images crossfade behind the title.
 const SLIDES = [
@@ -49,6 +50,13 @@ export default function Hero() {
         ".hero-subtitle, .hero-tagline, .hero-cta, .hero-badges, .hero-scroll-indicator, .hero-line-1, .hero-line-2",
         { visibility: "visible" }
       );
+
+      // Reduced motion: reveal everything in its final state, skip entrance +
+      // scroll-driven motion. (The accent line otherwise starts at width 0.)
+      if (prefersReducedMotion()) {
+        gsap.set(".hero-line-accent", { width: "80px" });
+        return;
+      }
 
       const tl = gsap.timeline({
         defaults: { ease: "power3.out", force3D: true },

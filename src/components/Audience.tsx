@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionLabel from "@/components/SectionLabel";
+import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 const audienceList = [
   "לאנשים שרוצים ליזום ולהוביל ",
@@ -18,6 +19,8 @@ export default function Audience() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion()) return;
+
       // Header dramatic entrance
       gsap.from(".audience-header", {
         scrollTrigger: {
