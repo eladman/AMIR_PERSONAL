@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionLabel from "@/components/SectionLabel";
 
 const pillars = ["קבלת החלטות", "דיוק", "תנועה קדימה"];
 
@@ -73,9 +74,7 @@ export default function MethodSection() {
 
       <div className="max-w-5xl mx-auto relative z-10 text-center">
         {/* Eyebrow */}
-        <h2 className="method-anim text-primary font-bold text-sm md:text-base mb-8 tracking-[0.3em] uppercase">
-          המתודה
-        </h2>
+        <SectionLabel className="method-anim mb-8">המתודה</SectionLabel>
 
         {/* 1 ← 0 visual */}
         <div className="flex items-center justify-center gap-6 md:gap-10 mb-10" dir="ltr">
@@ -103,9 +102,9 @@ export default function MethodSection() {
         </div>
 
         {/* Headline */}
-        <h3 className="method-anim text-4xl md:text-6xl font-black leading-tight mb-8">
+        <h2 className="method-anim text-4xl md:text-6xl font-black leading-tight mb-8">
           מאפס. <span className="text-primary">לאחד.</span>
-        </h3>
+        </h2>
 
         {/* Body */}
         <p className="method-anim text-xl md:text-2xl leading-relaxed text-white/75 font-medium max-w-3xl mx-auto">

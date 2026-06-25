@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionLabel from "@/components/SectionLabel";
 
 const AUTOPLAY_MS = 6500;
 
@@ -72,12 +73,9 @@ export default function Testimonials() {
         onBlurCapture={() => setPaused(false)}
       >
         {/* Eyebrow */}
-        <div className="testimonials-reveal flex items-center gap-4 mb-12 md:mb-16">
-          <span className="h-px w-10 bg-primary" />
-          <span className="text-primary font-bold text-xs md:text-sm tracking-[0.32em] uppercase">
-            קולות מהסדנה הראשונה
-          </span>
-        </div>
+        <SectionLabel withLine className="testimonials-reveal mb-12 md:mb-16">
+          קולות מהסדנה הראשונה
+        </SectionLabel>
 
         {/* Quote stage */}
         <div

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import SectionLabel from "@/components/SectionLabel";
 
 const CAROUSEL_IMAGES = [
   { src: "/images/MainScroll.jpeg", alt: "Globes 40x40 cover" },
@@ -99,13 +100,13 @@ export default function Format() {
 
         {/* Content */}
         <div className="w-full lg:w-1/2 flex flex-col items-start">
-          <h2 className="format-text text-primary font-bold text-xl mb-4 uppercase tracking-widest">
+          <SectionLabel withLine className="format-text mb-4">
             איך זה יראה?
-          </h2>
-          <h3 className="format-text text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight">
+          </SectionLabel>
+          <h2 className="format-text text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight">
             תוכן. טבע. תנועה.השראה. <br />
             <span className="text-secondary/60">מפגש אנושי נטול אינטרס</span>
-          </h3>
+          </h2>
           {/* Date, Time & Location details */}
           <div className="format-text mt-10 flex flex-col gap-4">
             <div className="flex items-center gap-4">

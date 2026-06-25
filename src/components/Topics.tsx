@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionLabel from "@/components/SectionLabel";
 
 const topics = [
   {
@@ -72,11 +73,10 @@ export default function Topics() {
 
         {/* Heading */}
         <div className="max-w-3xl mb-16 md:mb-20">
-          <h2 className="topic-title-anim text-primary font-bold text-xl mb-4 uppercase tracking-widest flex items-center gap-4">
-            <span className="w-12 h-[2px] bg-primary rounded-full"></span>
+          <SectionLabel withLine className="topic-title-anim mb-4">
             על מה נעבוד?
-          </h2>
-          <h3 className="topic-title-anim text-4xl md:text-5xl lg:text-7xl font-black text-white leading-[1.1]">
+          </SectionLabel>
+          <h2 className="topic-title-anim text-4xl md:text-5xl lg:text-7xl font-black text-white leading-[1.1]">
             הכלים שייקחו אותך{" "}
             <span className="text-primary relative inline-block">
               לשלב הבא
@@ -84,7 +84,7 @@ export default function Topics() {
                 <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="3" fill="none" />
               </svg>
             </span>
-          </h3>
+          </h2>
           <p className="topic-title-anim mt-8 text-xl text-white/50 leading-relaxed font-medium">
             הסדנה בנויה כהליך התפתחותי, שלב אחר שלב. לפניכם שלושת השלבים שנעבור יחד.
           </p>
@@ -108,9 +108,9 @@ export default function Topics() {
                 <div className="w-10 h-[2px] bg-primary/50 rounded-full mb-6" />
 
                 {/* Title */}
-                <h4 className="text-2xl md:text-3xl lg:text-[2rem] font-black text-white leading-tight mb-3">
+                <h3 className="text-2xl md:text-3xl lg:text-[2rem] font-black text-white leading-tight mb-3">
                   {topic.title}
-                </h4>
+                </h3>
 
                 {/* Essence — always visible */}
                 <p className="text-base md:text-lg text-primary font-bold leading-relaxed flex-1">

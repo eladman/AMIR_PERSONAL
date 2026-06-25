@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import CTAButton from "@/components/CTAButton";
+import SectionLabel from "@/components/SectionLabel";
 
 // Cinematic background carousel — workshop atmosphere images crossfade behind the title.
 const SLIDES = [
@@ -158,9 +159,9 @@ export default function Hero() {
       <div className="relative z-10 h-full max-w-5xl mx-auto px-6 flex flex-col items-center justify-center text-center">
         <div className="hero-content flex flex-col items-center">
           {/* Eyebrow / subtitle */}
-          <p className="hero-subtitle text-primary text-sm md:text-base font-bold tracking-[0.3em] uppercase mb-6">
+          <SectionLabel className="hero-subtitle mb-6">
             סדנת יום אחד · עמיר מנחם
-          </p>
+          </SectionLabel>
 
           {/* Headline */}
           <h1 className="mb-6 md:mb-8">

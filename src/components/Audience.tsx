@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionLabel from "@/components/SectionLabel";
 
 const audienceList = [
   "לאנשים שרוצים ליזום ולהוביל ",
@@ -79,13 +80,11 @@ export default function Audience() {
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
         <div className="audience-header mb-16 md:mb-20">
-          <h2 className="text-primary font-bold text-sm md:text-base mb-4 tracking-[0.3em] uppercase">
-            למי זה מיועד?
-          </h2>
-          <h3 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight">
+          <SectionLabel className="mb-4">למי זה מיועד?</SectionLabel>
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight">
             האם המקום הזה{" "}
             <span className="text-primary">עבורך?</span>
-          </h3>
+          </h2>
           <p className="mt-6 text-lg md:text-2xl text-secondary/60 font-medium max-w-2xl leading-relaxed">
             הסדנה נפתחת לקבוצה מצומצמת ומדויקת — לא לכולם, אלא למי שבאמת מוכן לזוז.
           </p>
