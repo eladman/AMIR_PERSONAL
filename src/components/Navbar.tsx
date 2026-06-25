@@ -6,9 +6,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 
 export default function Navbar() {
-  const navRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  // Over the dark cinematic hero the bar is dark glass + white text;
+  // once scrolled into the white page sections it morphs to light glass.
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -25,11 +27,11 @@ export default function Navbar() {
         delay: 1.5,
       });
 
-      // Scroll morph
+      // Scroll morph — flip to the light style once past the hero edge
       ScrollTrigger.create({
         start: "top -50",
         end: 99999,
-        toggleClass: { className: "nav-scrolled", targets: navRef.current! },
+        onToggle: (self) => setScrolled(self.isActive),
       });
     });
 
@@ -50,6 +52,12 @@ export default function Navbar() {
     }
   }, [menuOpen]);
 
+  // Color tokens that flip with scroll state
+  const textColor = scrolled ? "text-secondary" : "text-white";
+  const barClass = scrolled
+    ? "bg-white/90 md:backdrop-blur-xl border-secondary/10 shadow-sm py-1.5"
+    : "bg-white/10 md:backdrop-blur-md border-white/20 py-2";
+
   return (
     <>
       <div
@@ -57,17 +65,16 @@ export default function Navbar() {
         className="nav-init fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
       >
         <nav
-          ref={navRef}
-          className="pointer-events-auto flex items-center justify-between w-full max-w-4xl px-5 py-2 rounded-full transition-all duration-500 bg-white/80 md:bg-white/60 md:backdrop-blur-md text-secondary border border-secondary/10 [&.nav-scrolled]:bg-white/95 [&.nav-scrolled]:md:bg-white/90 [&.nav-scrolled]:md:backdrop-blur-xl [&.nav-scrolled]:border-secondary/10 [&.nav-scrolled]:shadow-sm [&.nav-scrolled]:py-1.5"
+          className={`pointer-events-auto flex items-center justify-between w-full max-w-4xl px-5 rounded-full border transition-all duration-500 ${barClass}`}
         >
           {/* Logo */}
-          <Link href="/" className="font-black text-lg tracking-tight">
+          <Link href="/" className={`font-black text-lg tracking-tight transition-colors duration-500 ${textColor}`}>
             <span className="font-light">מאפס</span>
             <span className="text-primary font-black">לאחד</span>
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8 font-medium text-sm">
+          <div className={`hidden md:flex items-center gap-8 font-medium text-sm transition-colors duration-500 ${textColor}`}>
             {[
               { href: "#method", label: "המתודה" },
               { href: "#topics", label: "הסדנה" },
@@ -103,27 +110,27 @@ export default function Navbar() {
             aria-label="תפריט"
           >
             <span
-              className={`w-6 h-[2px] bg-secondary transition-all duration-300 ${
-                menuOpen ? "rotate-45 translate-y-[5px]" : ""
-              }`}
+              className={`w-6 h-[2px] transition-all duration-300 ${
+                scrolled ? "bg-secondary" : "bg-white"
+              } ${menuOpen ? "rotate-45 translate-y-[5px] !bg-white" : ""}`}
             />
             <span
-              className={`w-6 h-[2px] bg-secondary transition-all duration-300 ${
-                menuOpen ? "opacity-0" : ""
-              }`}
+              className={`w-6 h-[2px] transition-all duration-300 ${
+                scrolled ? "bg-secondary" : "bg-white"
+              } ${menuOpen ? "opacity-0" : ""}`}
             />
             <span
-              className={`w-6 h-[2px] bg-secondary transition-all duration-300 ${
-                menuOpen ? "-rotate-45 -translate-y-[5px]" : ""
-              }`}
+              className={`w-6 h-[2px] transition-all duration-300 ${
+                scrolled ? "bg-secondary" : "bg-white"
+              } ${menuOpen ? "-rotate-45 -translate-y-[5px] !bg-white" : ""}`}
             />
           </button>
         </nav>
       </div>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu overlay — dark to match the cinematic hero */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-white flex flex-col items-center justify-center gap-8">
+        <div className="fixed inset-0 z-40 bg-secondary flex flex-col items-center justify-center gap-8">
           {[
             { href: "#method", label: "המתודה" },
             { href: "#audience", label: "למי זה מיועד" },
@@ -137,7 +144,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="mobile-link text-secondary text-3xl font-bold hover:text-primary transition-colors"
+              className="mobile-link text-white text-3xl font-bold hover:text-primary transition-colors"
             >
               {link.label}
             </Link>

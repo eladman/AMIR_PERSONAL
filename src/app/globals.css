@@ -78,11 +78,30 @@
 .hero-subtitle,
 .hero-tagline,
 .hero-manifesto,
+.hero-badges,
 .hero-cta,
 .hero-scroll-indicator,
 .hero-line-1,
 .hero-line-2 {
   visibility: hidden;
+}
+
+/* Cinematic Ken Burns — slow zoom on the active background slide */
+.hero-kenburns {
+  animation: hero-kenburns 8s ease-out forwards;
+}
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.14);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-kenburns {
+    animation: none;
+  }
 }
 
 .nav-init {
@@ -113,6 +132,28 @@
     linear-gradient(rgba(23,23,23,0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(23,23,23,0.04) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+/* Testimonial editorial rotator */
+@keyframes testimonial-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.testimonial-enter { animation: testimonial-enter 600ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@keyframes testimonial-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.testimonial-progress {
+  transform-origin: right center; /* RTL fill */
+  animation: testimonial-progress var(--testimonial-duration, 6500ms) linear forwards;
+}
+.testimonial-progress[data-paused="true"] { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-enter { animation: none; }
+  .testimonial-progress { animation: none; transform: scaleX(1); }
 }
 
 /* Ambient orb */
