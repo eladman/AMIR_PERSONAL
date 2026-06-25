@@ -4,8 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import CTAButton from "@/components/CTAButton";
+import CTAButton, { REGISTRATION_URL } from "@/components/CTAButton";
 import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
+
+// Single source of truth for primary section links — shared by desktop and
+// mobile so the two never drift. Every href points at a section that exists.
+const NAV_LINKS = [
+  { href: "#method", label: "המתודה" },
+  { href: "#audience", label: "למי זה מיועד" },
+  { href: "#topics", label: "הסדנה" },
+  { href: "#about", label: "על עמיר" },
+  { href: "#format", label: "המפגש" },
+];
 
 export default function Navbar() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -82,12 +92,7 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <div className={`hidden md:flex items-center gap-8 font-medium text-sm transition-colors duration-500 ${textColor}`}>
-            {[
-              { href: "#method", label: "המתודה" },
-              { href: "#topics", label: "הסדנה" },
-              { href: "#about", label: "על עמיר" },
-              { href: "#format", label: "המפגש" },
-            ].map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -133,13 +138,8 @@ export default function Navbar() {
       {menuOpen && (
         <div className="fixed inset-0 z-40 bg-secondary flex flex-col items-center justify-center gap-8">
           {[
-            { href: "#method", label: "המתודה" },
-            { href: "#audience", label: "למי זה מיועד" },
-            { href: "#topics", label: "הסדנה" },
-            { href: "#about", label: "על עמיר" },
-            { href: "#timeline", label: "לוח היום" },
-            { href: "#format", label: "המפגש" },
-            { href: "https://zygo.co.il/event/710553243573321580/ZF10o46f2", label: "הצטרף עכשיו" },
+            ...NAV_LINKS,
+            { href: REGISTRATION_URL, label: "הצטרף עכשיו" },
           ].map((link) => (
             <Link
               key={link.href}
