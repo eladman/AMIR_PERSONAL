@@ -123,7 +123,7 @@ export default function Closing() {
             {/* wavy orange underline */}
             <svg
               aria-hidden="true"
-              className="absolute -bottom-2 right-0 w-full"
+              className="absolute -bottom-2 right-0 w-full text-primary"
               viewBox="0 0 120 8"
               preserveAspectRatio="none"
               fill="none"
@@ -131,7 +131,7 @@ export default function Closing() {
             >
               <path
                 d="M2 6 C22 2, 42 6, 62 3 C82 0, 102 4, 118 2"
-                stroke="#FF8714"
+                stroke="currentColor"
                 strokeWidth="2.5"
                 strokeLinecap="round"
               />
