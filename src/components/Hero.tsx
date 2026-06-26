@@ -197,7 +197,7 @@ export default function Hero() {
           <div className="hero-badges flex flex-wrap items-center justify-center gap-3 mb-8">
             <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 text-sm font-bold text-white backdrop-blur-sm">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></svg>
-              21.08.2026 · טל והדר, עמק חפר
+              21.08.2026 · הפגודה, שדות ים
             </span>
             <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 text-sm font-bold text-white backdrop-blur-sm">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></svg>
@@ -221,7 +221,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="hero-scroll-indicator absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
-        <span className="text-white/50 text-xs tracking-widest uppercase">גלול</span>
+        <span className="text-white/50 text-xs tracking-widest uppercase">גלילה</span>
         <div className="w-[1px] h-8 bg-white/20 relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-full bg-primary animate-scroll-line" />
         </div>

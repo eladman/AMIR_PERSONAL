@@ -93,60 +93,89 @@ export default function Topics() {
           </p>
         </div>
 
-        {/* 3-column card grid */}
-        <div className="topic-grid grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
-          {topics.map((topic, index) => {
-            const isOpen = openIndex === index;
-            return (
-              <div
-                key={topic.id}
-                className="topic-card flex flex-col border border-white/10 rounded-card p-7 lg:p-9 bg-white/[0.04] hover:bg-white/[0.07] hover:border-white/20 transition-colors duration-300"
-              >
-                {/* Visible step number */}
-                <span className="text-primary font-black text-5xl md:text-6xl leading-none mb-6 select-none">
-                  0{index + 1}
-                </span>
+        {/* Connected stepper */}
+        <div className="topic-grid relative">
+          {/* Horizontal progress line — aligned to node centers (desktop) */}
+          <div className="hidden md:block absolute top-7 left-[16.666%] right-[16.666%] h-px bg-gradient-to-l from-primary/0 via-primary/40 to-primary/0 pointer-events-none" />
 
-                {/* Thin accent line */}
-                <div className="w-10 h-[2px] bg-primary/50 rounded-full mb-6" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5 lg:gap-x-8 gap-y-0 relative">
+            {topics.map((topic, index) => {
+              const isOpen = openIndex === index;
+              return (
+                <div key={topic.id} className="topic-card flex flex-col items-center">
+                  {/* Numbered node sitting on the line */}
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    aria-expanded={isOpen}
+                    aria-label={`${topic.title} — ${isOpen ? "סגירה" : "הרחבה"}`}
+                    className={`relative z-10 flex items-center justify-center w-14 h-14 rounded-full font-black text-lg cursor-pointer transition-all duration-300 ${
+                      isOpen
+                        ? "bg-primary text-secondary border-2 border-primary shadow-[0_0_30px_rgba(255,135,20,0.5)] scale-105"
+                        : "bg-secondary text-primary border-2 border-primary/40 hover:border-primary hover:scale-105"
+                    }`}
+                  >
+                    {index + 1}
+                  </button>
 
-                {/* Title */}
-                <h3 className="text-2xl md:text-3xl lg:text-[2rem] font-black text-white leading-tight mb-3">
-                  {topic.title}
-                </h3>
-
-                {/* Essence — always visible */}
-                <p className="text-base md:text-lg text-primary font-bold leading-relaxed flex-1">
-                  {topic.essence}
-                </p>
-
-                {/* Expand button */}
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="flex items-center gap-2 mt-7 text-white/30 text-sm font-medium hover:text-primary transition-colors duration-200 cursor-pointer w-fit"
-                  aria-expanded={isOpen}
-                >
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                  {/* Connector stub from node down to card */}
+                  <div
+                    className={`w-px h-5 transition-colors duration-300 ${
+                      isOpen ? "bg-primary/60" : "bg-primary/25"
+                    }`}
                   />
-                  {isOpen ? "סגירה" : "לחץ להרחבה"}
-                </button>
 
-                {/* Collapsible description */}
-                <div
-                  style={{
-                    maxHeight: isOpen ? "300px" : "0px",
-                    opacity: isOpen ? 1 : 0,
-                  }}
-                  className="overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.2,1)]"
-                >
-                  <p className="text-sm lg:text-base text-white/50 leading-relaxed font-medium mt-5 border-t border-white/10 pt-5">
-                    {topic.description}
-                  </p>
+                  {/* Card */}
+                  <div
+                    className={`w-full flex flex-col flex-1 text-center border rounded-card p-7 lg:p-8 transition-all duration-300 ${
+                      isOpen
+                        ? "bg-white/[0.07] border-primary/40 shadow-[0_8px_40px_-12px_rgba(255,135,20,0.35)]"
+                        : "bg-white/[0.04] border-white/10 hover:bg-white/[0.06] hover:border-white/20"
+                    }`}
+                  >
+                    {/* Title */}
+                    <h3 className="text-2xl md:text-3xl font-black text-white leading-tight mb-3">
+                      {topic.title}
+                    </h3>
+
+                    {/* Essence — always visible */}
+                    <p className="text-base md:text-lg text-primary font-bold leading-relaxed flex-1">
+                      {topic.essence}
+                    </p>
+
+                    {/* Expand button */}
+                    <button
+                      onClick={() => setOpenIndex(isOpen ? null : index)}
+                      className="flex items-center justify-center gap-2 mt-7 text-white/40 text-sm font-medium hover:text-primary transition-colors duration-200 cursor-pointer mx-auto"
+                      aria-expanded={isOpen}
+                    >
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                      />
+                      {isOpen ? "סגירה" : "לחיצה להרחבה"}
+                    </button>
+
+                    {/* Collapsible description */}
+                    <div
+                      style={{
+                        maxHeight: isOpen ? "300px" : "0px",
+                        opacity: isOpen ? 1 : 0,
+                      }}
+                      className="overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.2,1)]"
+                    >
+                      <p className="text-sm lg:text-base text-white/50 leading-relaxed font-medium mt-5 border-t border-white/10 pt-5 text-right">
+                        {topic.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Vertical connector between steps (mobile only) */}
+                  {index < topics.length - 1 && (
+                    <div className="md:hidden w-px h-8 bg-gradient-to-b from-primary/40 to-primary/10" />
+                  )}
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
       </div>

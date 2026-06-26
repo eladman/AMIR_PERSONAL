@@ -46,20 +46,6 @@ export default function Audience() {
         ease: "power3.out",
       });
 
-      // Numbers pop in
-      gsap.from(".audience-number", {
-        scrollTrigger: {
-          trigger: ".audience-list",
-          start: "top 85%",
-        },
-        scale: 0,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.2,
-        ease: "back.out(1.7)",
-        delay: 0.3,
-      });
-
       // Line draw per item
       gsap.utils.toArray<HTMLElement>(".audience-item").forEach((item) => {
         const line = item.querySelector(".audience-line");
@@ -100,11 +86,6 @@ export default function Audience() {
               key={index}
               className="audience-item group flex items-center gap-4 md:gap-6 lg:gap-10 py-6 md:py-8 lg:py-10 border-b border-secondary/10 hover:border-primary/30 transition-colors cursor-default"
             >
-              {/* Large faded number */}
-              <span className="audience-number text-5xl md:text-7xl font-black text-secondary/10 group-hover:text-primary/40 transition-colors duration-300 shrink-0 w-20 md:w-28 text-center">
-                0{index + 1}
-              </span>
-
               {/* Divider line */}
               <span className="audience-line hidden md:block w-12 group-hover:w-20 h-[2px] bg-secondary/20 group-hover:bg-primary transition-all duration-500 shrink-0" />
 

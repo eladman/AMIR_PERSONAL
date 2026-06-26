@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Ticker from "@/components/Ticker";
+// import Ticker from "@/components/Ticker";
 import MethodSection from "@/components/MethodSection";
 import About from "@/components/About";
 import Topics from "@/components/Topics";
@@ -15,7 +15,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
-      <Ticker />
+      {/* <Ticker /> */}
       <MethodSection />
       <Audience />
       <Topics />
