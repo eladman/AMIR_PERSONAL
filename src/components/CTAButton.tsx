@@ -1,18 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { forwardRef, type ReactNode } from "react";
+import { useRegistration } from "@/components/RegistrationModal";
 
-// Single source of truth for the registration link, previously duplicated
-// across Hero, Navbar and Closing.
-export const REGISTRATION_URL =
-  "https://zygo.co.il/event/710553243573321580/ZF10o46f2";
+// Registration no longer links straight to a single Zygo page — there are two
+// workshop dates. Every CTA opens the shared date-selection modal instead.
+// (The modal owns the per-date links; see RegistrationModal.tsx.)
 
 type CTAButtonProps = {
   children: ReactNode;
   /** sm = navbar, md = hero, lg = closing climax */
   size?: "sm" | "md" | "lg";
-  href?: string;
   /** Extra classes for context: GSAP target hooks, contextual shadow, etc. */
   className?: string;
   /** Optional trailing icon (slides on hover). */
@@ -27,25 +25,23 @@ const sizeClasses: Record<NonNullable<CTAButtonProps["size"]>, string> = {
 
 // One register button: same shape, weight, hover overlay, and white text on
 // orange. Note: white-on-orange is ~2.4:1, below WCAG-AA (4.5:1).
-const CTAButton = forwardRef<HTMLAnchorElement, CTAButtonProps>(
-  function CTAButton(
-    { children, size = "md", href = REGISTRATION_URL, className = "", icon },
-    ref
-  ) {
+const CTAButton = forwardRef<HTMLButtonElement, CTAButtonProps>(
+  function CTAButton({ children, size = "md", className = "", icon }, ref) {
+    const { open } = useRegistration();
+
     return (
-      <Link
+      <button
         ref={ref}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`group relative inline-flex items-center overflow-hidden rounded-full bg-primary font-bold text-white transition-[transform,box-shadow] duration-300 hover:scale-[1.03] active:scale-95 ${sizeClasses[size]} ${className}`}
+        type="button"
+        onClick={open}
+        className={`group relative inline-flex cursor-pointer items-center overflow-hidden rounded-full bg-primary font-bold text-white transition-[transform,box-shadow] duration-300 hover:scale-[1.03] active:scale-95 ${sizeClasses[size]} ${className}`}
       >
         <span className="relative z-10 flex items-center gap-3">
           {children}
           {icon}
         </span>
         <div className="absolute inset-0 translate-y-full bg-white/20 transition-transform duration-300 group-hover:translate-y-0" />
-      </Link>
+      </button>
     );
   }
 );

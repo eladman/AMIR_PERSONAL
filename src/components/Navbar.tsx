@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import CTAButton, { REGISTRATION_URL } from "@/components/CTAButton";
+import CTAButton from "@/components/CTAButton";
+import { useRegistration } from "@/components/RegistrationModal";
 import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 // Single source of truth for primary section links — shared by desktop and
@@ -19,6 +20,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { open: openRegistration } = useRegistration();
   const [menuOpen, setMenuOpen] = useState(false);
   // Over the dark cinematic hero the bar is dark glass + white text;
   // once scrolled into the white page sections it morphs to light glass.
@@ -137,10 +139,7 @@ export default function Navbar() {
       {/* Mobile menu overlay — dark to match the cinematic hero */}
       {menuOpen && (
         <div className="fixed inset-0 z-40 bg-secondary flex flex-col items-center justify-center gap-8">
-          {[
-            ...NAV_LINKS,
-            { href: REGISTRATION_URL, label: "הצטרף עכשיו" },
-          ].map((link) => (
+          {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -150,6 +149,16 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          <button
+            type="button"
+            onClick={() => {
+              setMenuOpen(false);
+              openRegistration();
+            }}
+            className="mobile-link text-primary text-3xl font-black hover:text-white transition-colors"
+          >
+            הצטרף עכשיו
+          </button>
         </div>
       )}
     </>
