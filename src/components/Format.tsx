@@ -8,10 +8,9 @@ import SectionLabel from "@/components/SectionLabel";
 import { prefersReducedMotion } from "@/lib/prefersReducedMotion";
 
 const CAROUSEL_IMAGES = [
-  { src: "/images/MainScroll.jpeg", alt: "Globes 40x40 cover" },
-  { src: "/images/amir_small_group.jpeg", alt: "תנועה וטבע" },
-  { src: "/images/pic_5.jpeg", alt: "מפגש אנושי" },
-  { src: "/images/pic_12.jpeg", alt: "אווירת הסדנה" },
+  { src: "/images/workshop/IMG_3450.jpg.png", alt: "אווירת הסדנה" },
+  { src: "/images/workshop/IMG_3451.jpg.png", alt: "תנועה וטבע" },
+  { src: "/images/workshop/IMG_3455.jpg.png", alt: "מפגש אנושי" },
 ];
 
 export default function Format() {
@@ -176,22 +175,19 @@ export default function Format() {
 
         {/* Desktop Grid — hidden on mobile */}
         <div className="hidden lg:grid grid-cols-2 gap-4 lg:w-1/2">
-          <div className="format-image relative aspect-[3/4] rounded-image overflow-hidden shadow-xl group">
-            <Image
-              src="/images/amir_small_group.jpeg"
-              alt="תנועה וטבע"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          </div>
-          <div className="format-image relative aspect-[3/4] rounded-image overflow-hidden shadow-xl group">
-            <Image
-              src="/images/pic_5.jpeg"
-              alt="מפגש אנושי"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          </div>
+          {CAROUSEL_IMAGES.map((img, i) => (
+            <div
+              key={i}
+              className={`format-image relative aspect-[3/4] rounded-image overflow-hidden shadow-xl group ${i === 0 ? "col-span-2" : ""}`}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+          ))}
         </div>
 
       </div>

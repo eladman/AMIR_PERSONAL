@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionLabel from "@/components/SectionLabel";
@@ -10,6 +11,13 @@ const pillars = ["קבלת החלטות", "דיוק", "תנועה קדימה"];
 
 export default function MethodSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  const startVideo = () => {
+    setPlaying(true);
+    videoRef.current?.play();
+  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -125,6 +133,51 @@ export default function MethodSection() {
               </span>
             </div>
           ))}
+        </div>
+
+        {/* Video — a glimpse of Amir mid-workshop, click to play with sound */}
+        <div className="method-anim mt-16 md:mt-20 flex justify-center">
+          <div className="w-full max-w-[300px] md:max-w-[340px] rounded-image bg-white/[0.06] p-2 shadow-2xl ring-1 ring-white/10">
+            <div className="relative aspect-[9/16] overflow-hidden rounded-image">
+              <video
+                ref={videoRef}
+                src="/amir_video.mp4"
+                poster="/images/amir_video_poster.jpg"
+                controls={playing}
+                playsInline
+                preload="none"
+                className="h-full w-full object-cover"
+                onPlay={() => setPlaying(true)}
+                onPause={() => setPlaying(false)}
+              />
+
+              {!playing && (
+                <button
+                  type="button"
+                  onClick={startVideo}
+                  aria-label="הפעלת הסרטון מהסדנה"
+                  className="group absolute inset-0 flex flex-col items-center justify-end gap-4 bg-gradient-to-t from-secondary/70 via-secondary/10 to-transparent pb-8 cursor-pointer focus-visible:outline-none"
+                >
+                  {/* Poster overlay — pulled in so the play button reads instantly */}
+                  <Image
+                    src="/images/amir_video_poster.jpg"
+                    alt="עמיר מנחם בסדנה"
+                    fill
+                    sizes="(max-width: 768px) 300px, 340px"
+                    className="object-cover -z-10"
+                  />
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform duration-300 group-hover:scale-110 group-focus-visible:scale-110">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="ml-0.5">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+                  <span className="text-sm font-bold text-white/90 tracking-wide">
+                    רגעים מהסדנה האחרונה
+                  </span>
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </section>
