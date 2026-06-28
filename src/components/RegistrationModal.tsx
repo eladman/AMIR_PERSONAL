@@ -22,12 +22,14 @@ export type RegistrationOption = {
 };
 
 export const REGISTRATION_OPTIONS: RegistrationOption[] = [
-  {
-    date: "07.08.2026",
-    location: "הפגודה, שדות ים",
-    time: "09:00 – 14:30",
-    href: "https://zygo.co.il/event/660685259884575622/ZF10o46f2",
-  },
+  // August date is temporarily disabled — only October is open for registration
+  // for now. Re-enable this entry to bring back the date-selection modal.
+  // {
+  //   date: "07.08.2026",
+  //   location: "הפגודה, שדות ים",
+  //   time: "09:00 – 14:30",
+  //   href: "https://zygo.co.il/event/660685259884575622/ZF10o46f2",
+  // },
   {
     date: "02.10.2026",
     location: "הפגודה, שדות ים",
@@ -73,7 +75,20 @@ const RegistrationContext = createContext<RegistrationContextValue | null>(null)
 export function RegistrationProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const open = useCallback(() => setIsOpen(true), []);
+  const open = useCallback(() => {
+    // With a single date open, skip the "באיזה מועד תרצו להשתתף?" picker and go
+    // straight to its registration page. The modal returns automatically once a
+    // second date is re-enabled in REGISTRATION_OPTIONS.
+    if (REGISTRATION_OPTIONS.length === 1) {
+      window.open(
+        REGISTRATION_OPTIONS[0].href,
+        "_blank",
+        "noopener,noreferrer"
+      );
+      return;
+    }
+    setIsOpen(true);
+  }, []);
   const close = useCallback(() => setIsOpen(false), []);
 
   return (

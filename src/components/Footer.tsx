@@ -28,7 +28,6 @@ export default function Footer() {
         <div className="footer-el flex flex-col items-center md:items-start gap-2">
           <h4 className="font-black text-2xl tracking-tight">עמיר מנחם</h4>
           <p className="text-secondary/60 text-sm font-medium">מאפס לאחד - סדנה אישית</p>
-          <p className="text-secondary/50 text-xs font-medium">07.08.2026 · הפגודה, שדות ים</p>
           <p className="text-secondary/50 text-xs font-medium">02.10.2026 · הפגודה, שדות ים</p>
         </div>
 

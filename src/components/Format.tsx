@@ -117,7 +117,6 @@ export default function Format() {
               </div>
               <div>
                 <p className="text-sm text-secondary/50 font-medium">מתי ואיפה?</p>
-                <p className="text-xl font-bold">07.08.2026 · הפגודה, שדות ים</p>
                 <p className="text-xl font-bold">02.10.2026 · הפגודה, שדות ים</p>
               </div>
             </div>
